@@ -1,0 +1,110 @@
+---
+const services = [
+  "House Soft Wash",
+  "Driveway & Concrete",
+  "Roof Cleaning",
+  "Deck & Fence",
+  "Gutter Cleaning",
+  "Commercial",
+  "Not Sure / Other",
+];
+---
+<form id="quoteForm" class="grid gap-4 max-w-xl" novalidate>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="qf-name" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Name *</label>
+      <input id="qf-name" name="name" type="text" required class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+    </div>
+    <div>
+      <label for="qf-phone" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Phone</label>
+      <input id="qf-phone" name="phone" type="tel" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+    </div>
+  </div>
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label for="qf-email" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Email</label>
+      <input id="qf-email" name="email" type="email" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+    </div>
+    <div>
+      <label for="qf-city" class="block text-xs font-bold uppercase tracking-wider mb-1.5">City</label>
+      <input id="qf-city" name="city" type="text" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+    </div>
+  </div>
+  <div>
+    <label for="qf-service" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Service Needed</label>
+    <select id="qf-service" name="service" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white">
+      <option value="">Select a service</option>
+      {services.map((s) => <option value={s}>{s}</option>)}
+    </select>
+  </div>
+  <div>
+    <label for="qf-message" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Message</label>
+    <textarea id="qf-message" name="message" rows="4" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white"></textarea>
+  </div>
+  <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+  <div>
+    <button type="submit" id="qfSubmit" class="btn-sweep inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:text-white disabled:opacity-60">
+      Send My Request
+    </button>
+  </div>
+  <p id="qfStatus" class="text-sm font-semibold" role="status"></p>
+</form>
+
+<script>
+  function initQuoteForm() {
+    const form = document.getElementById("quoteForm") as HTMLFormElement | null;
+    if (!form || form.dataset.init) return;
+    form.dataset.init = "true";
+    const status = document.getElementById("qfStatus");
+    const submitBtn = document.getElementById("qfSubmit") as HTMLButtonElement | null;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (status) status.textContent = "";
+
+      const nameEl = form.querySelector<HTMLInputElement>("[name=name]");
+      const emailEl = form.querySelector<HTMLInputElement>("[name=email]");
+      const phoneEl = form.querySelector<HTMLInputElement>("[name=phone]");
+
+      if (!nameEl?.value.trim() || (!emailEl?.value.trim() && !phoneEl?.value.trim())) {
+        if (status) {
+          status.textContent = "Please enter your name and either an email or phone number.";
+          status.className = "text-sm font-semibold text-red-600";
+        }
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (submitBtn) submitBtn.disabled = true;
+      if (status) {
+        status.textContent = "Sending...";
+        status.className = "text-sm font-semibold text-neutral-500";
+      }
+
+      try {
+        const res = await fetch("/api/quote", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(result.error || "Something went wrong.");
+
+        form.reset();
+        if (status) {
+          status.textContent = "Thanks! We'll be in touch shortly.";
+          status.className = "text-sm font-semibold text-green-700";
+        }
+      } catch (err) {
+        if (status) {
+          status.textContent = err instanceof Error ? err.message : "Something went wrong. Please call or text us instead.";
+          status.className = "text-sm font-semibold text-red-600";
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", initQuoteForm);
+  initQuoteForm();
+</script>
