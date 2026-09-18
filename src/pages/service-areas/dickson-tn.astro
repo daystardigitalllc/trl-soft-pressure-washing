@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Dickson TN | TRL Soft Pressure Washing";
+const description =
+  "Top rated pressure washing for Dickson, TN homes near I-40 and Highway 46. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Dickson, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Dickson", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/dickson-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Dickson, TN", item: `${business.siteUrl}/service-areas/dickson-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/dickson-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Dickson"
+    state="TN"
+    heading="Top Rated Pressure Washing in Dickson, TN"
+    intro="Dickson homes deal with algae, dirt, and environmental buildup caused by humidity and seasonal weather. Our professional pressure washing safely restores siding, concrete, and roofing."
+    intro2="From neighborhoods near downtown Dickson to properties along Highway 46 and Interstate 40, we provide dependable exterior cleaning services."
+    offerings={[
+      { title: "House Washing", desc: "Soft washing designed to remove algae and grime from siding safely." },
+      { title: "Driveway Cleaning", desc: "Deep cleaning for concrete driveways, sidewalks, and patios." },
+      { title: "Roof Cleaning", desc: "Low-pressure roof soft washing that eliminates black algae streaks." },
+    ]}
+    servingTitle="Serving Dickson County Homes"
+    neighborhoods={[
+      "Downtown Dickson neighborhoods",
+      "Homes along Highway 46 and Highway 48",
+      "Properties near Interstate 40",
+      "Residential communities throughout Dickson County",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

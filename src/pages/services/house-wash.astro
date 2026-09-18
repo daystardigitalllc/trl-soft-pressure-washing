@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceLanding from "../../components/ServiceLanding.astro";
+import { business } from "../../data/business.js";
+
+const title = "House Soft Wash Hohenwald, TN | TRL Soft Wash";
+const description =
+  "Safe, low-pressure house soft washing across Middle Tennessee. We remove algae, mold, and mildew from siding without damaging vinyl, stucco, brick, or paint.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "House Soft Washing",
+  name: "House Soft Wash",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/services/house-wash`,
+  description,
+};
+---
+<Layout title={title} description={description} path="/services/house-wash" jsonLd={jsonLd}>
+  <ServiceLanding
+    eyebrow="Safe Exterior Cleaning"
+    heroTitle="Restore Your Home's Exterior Beauty."
+    heroDesc="Our soft washing system safely eliminates mold, algae, and grime from siding, stucco, brick, and trim—leaving your home bright, clean, and protected."
+    beforeAfter={{
+      before: "/images/house/h2-b.jpg",
+      after: "/images/house/h2-a.jpg",
+      title: "House Soft Wash Results",
+      place: "Columbia, TN",
+      desc: "Years of mold and green algae buildup removed with a single soft wash treatment.",
+    }}
+    whyEyebrow="Exterior Damage & Health"
+    whyTitle="Why House Washing Matters in Tennessee"
+    whyIntro="Middle Tennessee's humidity creates the perfect environment for algae, mold, and mildew to grow on siding. Without regular house washing, these contaminants can stain your home, damage exterior materials, and make your property look neglected."
+    painPoints={[
+      { title: "Algae & Mold Streaks", desc: "Green and black algae often grow on siding in shaded or damp areas, leaving ugly streaks across your home's exterior." },
+      { title: "Siding & Paint Damage", desc: "Over time, mold and organic buildup can break down paint, vinyl siding, and trim, leading to premature wear and costly repairs." },
+      { title: "Allergens & Air Quality", desc: "Mold, mildew, and pollen buildup on your home can contribute to allergens around your property and outdoor living areas." },
+    ]}
+    processSteps={[
+      { title: "Inspect & Protect", desc: "We begin by inspecting your home's siding, trim, and exterior surfaces. Landscaping, outlets, and delicate areas are pre-wet and protected to ensure plants and surrounding areas remain safe during the cleaning process." },
+      { title: "Soft Wash Treatment", desc: "Our professional soft washing solution is applied to break down algae, mold, mildew, and built-up grime on your siding. This low-pressure method cleans deeply without damaging vinyl, stucco, brick, or painted surfaces." },
+      { title: "Gentle Rinse & Inspection", desc: "After the solution has done its job, we rinse the home with controlled low pressure and perform a final inspection to ensure your siding looks bright, clean, and evenly restored." },
+    ]}
+    faqs={[
+      { q: "Will house washing damage my siding?", a: "No. We use a professional soft washing process that relies on specialized cleaning solutions and low pressure. This safely removes algae, mold, and grime without damaging vinyl siding, stucco, brick, or painted surfaces." },
+      { q: "How long will my house stay clean?", a: "Most homes stay clean for 12–24 months depending on shade, moisture, and nearby trees. Homes in shaded areas may see algae return sooner, but regular maintenance washing keeps your exterior looking bright and well-maintained." },
+      { q: "How often should I wash my house?", a: "In Middle Tennessee's humid climate, we recommend house washing every 1–2 years. Regular cleaning prevents mold and algae from building up and helps protect your siding and paint from long-term damage." },
+    ]}
+    closingTitle="Bring Back Your Home's Curb Appeal"
+    closingDesc="Our professional soft washing removes algae, mold, and grime—leaving your home bright, clean, and refreshed."
+  />
+</Layout>

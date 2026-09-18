@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceLanding from "../../components/ServiceLanding.astro";
+import { business } from "../../data/business.js";
+
+const title = "Gutter Cleaning Hohenwald, TN | TRL Soft Wash";
+const description =
+  "Professional gutter cleaning across Middle Tennessee. We clear debris and flush downspouts to stop water damage before it starts.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Gutter Cleaning",
+  name: "Gutters & Window Cleaning",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/services/gutters-windows`,
+  description,
+};
+---
+<Layout title={title} description={description} path="/services/gutters-windows" jsonLd={jsonLd}>
+  <ServiceLanding
+    eyebrow="Clogged Gutter Solutions"
+    heroTitle="Stop Water Damage Before It Starts"
+    heroDesc="Our professional gutter cleaning removes leaves, debris, and blockages so rainwater flows properly and protects your roof, siding, and foundation."
+    beforeAfter={{
+      before: "/images/gutters/g1-b.jpg",
+      after: "/images/gutters/g1-a.jpg",
+      title: "Gutter System Cleaning",
+      place: "Middle Tennessee",
+      desc: "Leaves and debris cleared and downspouts flushed to restore proper drainage.",
+    }}
+    whyEyebrow="Water Damage Prevention"
+    whyTitle="Why Gutter Cleaning Matters in Tennessee"
+    whyIntro="Leaves, twigs, and roof debris can quickly clog gutters in Middle Tennessee. When gutters can't drain properly, water overflows and can cause serious damage to your roof, siding, and foundation."
+    painPoints={[
+      { title: "Clogged Gutters", desc: "Leaves, sticks, and roof debris collect in gutters and block water flow. Over time, this buildup prevents gutters from doing their job." },
+      { title: "Water Overflow Damage", desc: "When gutters are clogged, rainwater spills over the edges and can damage siding, fascia boards, and roofing materials." },
+      { title: "Foundation & Landscape Erosion", desc: "Overflowing gutters allow water to pool around your home's foundation, which can lead to soil erosion, basement leaks, and structural issues." },
+    ]}
+    processSteps={[
+      { title: "Inspect & Prepare", desc: "We inspect your gutters and downspouts to identify heavy debris buildup, clogs, and potential drainage issues. Ladders are safely positioned and surrounding areas are protected before cleaning begins." },
+      { title: "Remove Debris & Buildup", desc: "Leaves, twigs, dirt, and roof debris are carefully removed by hand or professional tools. This clears the gutter channel so rainwater can flow freely through the system." },
+      { title: "Flush & Flow Check", desc: "After debris removal, we flush the gutters and downspouts with water to ensure proper drainage. Any remaining clogs are cleared so water flows safely away from your home." },
+    ]}
+    faqs={[
+      { q: "How often should gutters be cleaned?", a: "Most homes in Middle Tennessee should have their gutters cleaned at least once or twice a year. Homes with many surrounding trees may require more frequent cleaning to prevent leaves and debris from clogging the system." },
+      { q: "What happens if my gutters are clogged?", a: "Clogged gutters prevent rainwater from draining properly. This can cause water to overflow and damage your roof, siding, landscaping, and even your home's foundation." },
+      { q: "Do you clean downspouts as well?", a: "Yes. After removing debris from the gutters, we flush the entire system and clear the downspouts to ensure water flows freely away from your home." },
+    ]}
+    closingTitle="Stop Costly Water Damage"
+    closingDesc="Our professional gutter cleaning removes debris and restores proper drainage to protect your home from overflow and foundation damage."
+  />
+</Layout>

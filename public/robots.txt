@@ -1,0 +1,49 @@
+# robots.txt for trlsoftpressurewashing.com
+# ------------------------------------------------------------------------------
+# 1. Sitemap Location
+# ------------------------------------------------------------------------------
+Sitemap: https://trlsoftpressurewashing.com/sitemap-index.xml
+
+# ------------------------------------------------------------------------------
+# 2. Global Crawler Rules
+# ------------------------------------------------------------------------------
+User-agent: *
+Allow: /
+
+# Block technical and sensitive directories
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /login/
+Disallow: /api/
+Disallow: /node_modules/
+
+# Block common tracking and session parameters to prevent duplicate content
+Disallow: /*?utm_
+Disallow: /*?session=
+Disallow: /*?fbclid=
+Disallow: /*?gclid=
+Disallow: /search/
+
+# ------------------------------------------------------------------------------
+# 3. Third-Party SEO Bot Control (Managing Crawl Budget)
+# ------------------------------------------------------------------------------
+User-agent: AhrefsBot
+Crawl-delay: 5
+
+User-agent: SemrushBot
+Crawl-delay: 5
+
+# ------------------------------------------------------------------------------
+# 4. Specific AI Bot Rules
+# ------------------------------------------------------------------------------
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Smyrna TN | TRL Soft Pressure Washing";
+const description =
+  "Professional soft washing and surface cleaning for Smyrna, TN homeowners. Licensed, insured, firefighter owned, based locally in Smyrna.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Smyrna, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Smyrna", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/smyrna-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Smyrna, TN", item: `${business.siteUrl}/service-areas/smyrna-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/smyrna-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Smyrna"
+    state="TN"
+    heading="Professional Pressure Washing in Smyrna, TN"
+    intro="Smyrna homeowners deal with pollen, humidity, and algae buildup that quickly dulls siding and concrete. Our professional soft washing and surface cleaning services restore homes across Smyrna safely and effectively."
+    intro2="From Lakefront neighborhoods near Percy Priest Lake to established subdivisions throughout town, we help Smyrna homeowners protect their property and boost curb appeal."
+    offerings={[
+      { title: "House Soft Washing", desc: "Safe removal of mold, mildew, algae, and grime from siding and brick." },
+      { title: "Driveway & Concrete Cleaning", desc: "Deep cleaning for driveways, sidewalks, patios, and pool decks." },
+      { title: "Roof Soft Washing", desc: "Gentle removal of roof algae that causes black streaks." },
+    ]}
+    servingTitle="Serving the Smyrna Area"
+    neighborhoods={[
+      "Lakefront homes near Percy Priest Lake",
+      "Woodmont, Clear Creek, and Lee Crossing",
+      "Neighborhoods near Nissan and Sam Ridley Parkway",
+      "Communities along Rocky Fork Road and Almaville Road",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

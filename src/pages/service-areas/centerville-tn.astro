@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Centerville TN | TRL Soft Pressure Washing";
+const description =
+  "Reliable soft washing for Centerville, TN and Hickman County homes. Licensed, insured, firefighter owned exterior cleaning.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Centerville, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Centerville", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/centerville-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Centerville, TN", item: `${business.siteUrl}/service-areas/centerville-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/centerville-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Centerville"
+    state="TN"
+    heading="Reliable Pressure Washing in Centerville, TN"
+    intro="Centerville homes experience heavy algae growth due to shade, humidity, and surrounding trees. Our professional soft washing removes buildup safely without damaging siding or roofing."
+    intro2="From homes near the historic square to rural properties across Hickman County, we provide dependable exterior cleaning."
+    offerings={[
+      { title: "House Washing", desc: "Low-pressure cleaning designed to protect siding and painted surfaces." },
+      { title: "Driveway Cleaning", desc: "Deep cleaning for concrete, sidewalks, and garage floors." },
+      { title: "Roof Cleaning", desc: "Soft wash treatments that remove black algae streaks." },
+    ]}
+    servingTitle="Serving Hickman County"
+    neighborhoods={[
+      "Centerville town neighborhoods",
+      "Properties along Highway 100",
+      "Rural homes and farms across Hickman County",
+      "Communities near Duck River recreation areas",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

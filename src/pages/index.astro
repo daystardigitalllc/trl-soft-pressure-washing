@@ -1,0 +1,231 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Marquee from "../components/Marquee.astro";
+import Faq from "../components/Faq.astro";
+import BeforeAfter from "../components/BeforeAfter.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import { business, services, homeFaqs } from "../data/business.js";
+
+const title = "TRL Soft Pressure Washing | Middle Tennessee's Trusted Exterior Cleaning Experts";
+const description =
+  "Firefighter owned soft wash & pressure washing for homes and businesses across Smyrna, Murfreesboro, Spring Hill and Middle Tennessee. Licensed, insured, 5.0 rated.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "@id": `${business.siteUrl}/`,
+  name: business.name,
+  image: `${business.siteUrl}${business.logo}`,
+  description:
+    "Professional soft washing and pressure washing services in Middle Tennessee. Specialized in house washing, roof cleaning, and commercial property maintenance.",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: business.addressLocality,
+    addressRegion: business.addressRegion,
+    addressCountry: business.addressCountry,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: business.geo.latitude,
+    longitude: business.geo.longitude,
+  },
+  url: business.siteUrl,
+  telephone: business.phone,
+  areaServed: business.areaServed,
+  priceRange: business.priceRange,
+  sameAs: [business.facebook],
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: business.rating.value,
+    reviewCount: business.rating.count,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: business.hours.days,
+      opens: business.hours.opens,
+      closes: business.hours.closes,
+    },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Cleaning Services",
+    itemListElement: business.servicesOffered.map((name) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name },
+    })),
+  },
+};
+
+const beforeAfters = [
+  {
+    before: "/images/house/h2-b.jpg",
+    after: "/images/house/h2-a.jpg",
+    badge: "Most Popular",
+    title: "Vinyl Siding Restoration",
+    place: "Columbia, TN",
+    desc: "Years of mold and green algae buildup removed with a single soft wash treatment.",
+  },
+  {
+    before: "/images/driveway/d1-b.jpg",
+    after: "/images/driveway/d1-a.jpg",
+    title: "Concrete Driveway",
+    place: "Hohenwald, TN",
+    desc: "Deep oil stains, tire marks, and years of embedded grime blasted away in under two hours.",
+  },
+  {
+    before: "/images/roof/r1-b.jpg",
+    after: "/images/roof/r1-a.jpg",
+    badge: "Saves Thousands",
+    title: "Metal Roof Algae Removal",
+    place: "Hohenwald, TN",
+    desc: "Gloeocapsa magma algae causing black streaks eliminated without voiding the roof warranty.",
+  },
+];
+---
+<Layout title={title} description={description} path="/" jsonLd={jsonLd}>
+  <section class="relative flex items-center min-h-screen overflow-hidden bg-white -mt-24 pt-24">
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_70%_at_15%_55%,rgba(204,17,17,0.06)_0%,transparent_65%),radial-gradient(ellipse_40%_40%_at_85%_20%,rgba(204,17,17,0.04)_0%,transparent_60%),linear-gradient(135deg,#ffffff_0%,#fafafa_60%,#f5f5f5_100%)]"></div>
+    <div class="absolute top-0 right-0 hidden h-full pointer-events-none lg:block w-[52%] [clip-path:polygon(18%_0%,100%_0%,100%_100%,0%_100%)]">
+      <img alt="Mike Hobbs, firefighter and owner of TRL Soft Pressure Wash" class="absolute inset-0 object-cover w-full h-full opacity-90 object-top" src="/images/about/mikehobbs.jpg" />
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_65%_45%,rgba(204,17,17,0.06)_0%,transparent_70%)]"></div>
+    </div>
+    <div class="relative z-10 w-full max-w-[1280px] px-7 mx-auto pt-[clamp(60px,10vh,100px)] pb-[clamp(80px,12vh,120px)]">
+      <div class="max-w-[580px]">
+        <div class="inline-flex items-center gap-2 px-4 py-2 mb-5 text-xs font-bold tracking-[0.22em] uppercase border rounded-lg bg-red-600/10 border-red-600/40 text-black">Firefighter Owned &amp; Operated</div>
+        <h1 class="mb-5 font-black uppercase leading-[0.9] tracking-tight">
+          <span class="block text-[clamp(3rem,6.5vw,5.8rem)] text-red-600">Restore.</span>
+          <span class="block text-[clamp(3rem,6.5vw,5.8rem)] text-black">Refresh.</span>
+          <span class="block mt-2 text-[clamp(1.5rem,2.8vw,2.5rem)] font-semibold text-neutral-500">Soft Pressure Washing</span>
+        </h1>
+        <p class="max-w-[440px] mb-9 text-neutral-500 leading-relaxed">
+          Residential &amp; commercial soft wash and pressure cleaning — safe, thorough, and built on the same commitment to service we carry on the line. Licensed. Insured. 100% satisfaction guaranteed.
+        </p>
+        <div class="flex flex-wrap items-center gap-4 mb-12">
+          <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600 hover:-translate-y-0.5 shadow-lg shadow-red-600/30">
+            Get a Free Quote
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path></svg>
+          </a>
+          <a href="#services" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">
+            Our Services ›
+          </a>
+        </div>
+        <div class="flex items-center gap-3 text-sm font-semibold text-neutral-500">
+          <span>Google Rating 5.0</span>
+          <span class="text-red-600 tracking-[2px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Marquee />
+
+  <section class="py-24 bg-white" id="services">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl mb-14 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">What We Do</span>
+        <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Our <span class="text-red-600">Services</span></h2>
+        <p class="mt-4 text-neutral-500 text-lg">Every surface. Every time. Built on the same discipline we carry on the fireground.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <ServiceCard
+            href={s.href ?? `/services/${s.slug}`}
+            image={s.image}
+            eyebrow={s.eyebrow}
+            label={s.label}
+            description={s.description}
+            tag={s.tag}
+          />
+        ))}
+      </div>
+      <div class="text-center mt-14 reveal">
+        <p class="font-bold text-lg mb-5">Not sure what you need? We'll assess your property and recommend exactly what it needs — for free.</p>
+        <a href={business.smsHref} class="btn-sweep inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:text-white">
+          Get a Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-black text-white">
+    <div class="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-2 items-center">
+      <div class="reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Service Grounded in Integrity</span>
+        <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">We don't just clean, we protect.</h2>
+        <p class="mt-5 text-neutral-300 text-lg leading-relaxed">
+          As firefighters, we are trained in precision and safety. We apply that same standard to restoring your
+          property's curb appeal, using advanced soft-wash techniques that ensure a deep clean without the damage
+          of high pressure.
+        </p>
+        <a href={business.smsHref} class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">
+          Get Your Free Estimate
+        </a>
+      </div>
+      <ul class="space-y-6 reveal">
+        <li class="border-l-2 border-red-600 pl-5">
+          <h3 class="font-extrabold uppercase text-lg mb-1">Precision Soft Washing</h3>
+          <p class="text-neutral-400">High pressure can crack mortar, strip paint, and force water behind siding. Our soft wash method uses low pressure and professional-grade solutions to clean deeper and last longer — safely.</p>
+        </li>
+        <li class="border-l-2 border-red-600 pl-5">
+          <h3 class="font-extrabold uppercase text-lg mb-1">Your Neighbor</h3>
+          <p class="text-neutral-400">We live and work in this community. No call centers, no subcontractors. When you call TRL, you're talking directly to the person showing up to do the work.</p>
+        </li>
+        <li class="border-l-2 border-red-600 pl-5">
+          <h3 class="font-extrabold uppercase text-lg mb-1">Zero Risk</h3>
+          <p class="text-neutral-400">Fully licensed and carrying comprehensive liability insurance. You're protected from the moment we pull into your driveway to the moment we leave.</p>
+        </li>
+        <li class="border-l-2 border-red-600 pl-5">
+          <h3 class="font-extrabold uppercase text-lg mb-1">Reliable Service</h3>
+          <p class="text-neutral-400">When we schedule a time, we show up. Your time is valuable, and we respect it.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl mb-14 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Real Results</span>
+        <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Before &amp; After</h2>
+        <p class="mt-4 text-neutral-500 text-lg">Drag the slider on any card to see the transformation.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {beforeAfters.map((b) => <BeforeAfter {...b} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl mx-auto mb-14 text-center reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Social Proof</span>
+        <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Rated 5.0 by Local Homeowners</h2>
+        <div class="mt-3 text-red-600 text-2xl tracking-[4px]">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      </div>
+      <div class="elfsight-app-google-reviews reveal" data-elfsight-app-lazy></div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-neutral-50">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="max-w-2xl mb-10 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Frequently Asked Questions</span>
+        <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Everything you need to know</h2>
+        <p class="mt-4 text-neutral-500 text-lg">About our process and professional standards.</p>
+      </div>
+      <Faq faqs={homeFaqs} />
+    </div>
+  </section>
+
+  <section class="bg-black text-white text-center py-24 px-6">
+    <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Ready to restore your property?</h2>
+    <p class="text-neutral-300 max-w-xl mx-auto mb-8 text-lg">Licensed, insured, and firefighter owned — serving Middle Tennessee with the same discipline we carry on the line.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
+      <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
+    </div>
+  </section>
+
+  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+</Layout>

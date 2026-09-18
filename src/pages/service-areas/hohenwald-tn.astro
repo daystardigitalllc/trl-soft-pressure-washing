@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Hohenwald TN | TRL Soft Pressure Washing";
+const description =
+  "Professional pressure washing for Hohenwald, TN and Lewis County homes near the Natchez Trace. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Hohenwald, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Hohenwald", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/hohenwald-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Hohenwald, TN", item: `${business.siteUrl}/service-areas/hohenwald-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/hohenwald-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Hohenwald"
+    state="TN"
+    heading="Professional Pressure Washing in Hohenwald, TN"
+    intro="Homes in Hohenwald often deal with algae, dirt, and mildew due to humidity and surrounding trees. Our professional pressure washing removes buildup safely while protecting siding and roofing."
+    intro2="From neighborhoods near downtown Hohenwald to rural homes across Lewis County, we provide dependable exterior cleaning services for homeowners."
+    offerings={[
+      { title: "House Washing", desc: "Soft washing that removes algae, mildew, and grime without damaging siding." },
+      { title: "Driveway Cleaning", desc: "Professional concrete cleaning that restores driveways, sidewalks, and patios." },
+      { title: "Roof Cleaning", desc: "Low-pressure roof washing that removes black algae streaks safely." },
+    ]}
+    servingTitle="Serving Hohenwald and Lewis County"
+    neighborhoods={[
+      "Homes throughout downtown Hohenwald",
+      "Properties along Highway 412 and Highway 20",
+      "Rural homes and farms across Lewis County",
+      "Communities near Natchez Trace Parkway",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

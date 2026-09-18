@@ -1,0 +1,95 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import { business, services } from "../data/business.js";
+
+const title = "Residential Pressure Washing Services | Middle Tennessee | TRL";
+const description =
+  "TRL Soft Pressure Wash helps Middle Tennessee homeowners restore curb appeal with safe soft washing, driveway cleaning, roof treatment, and more. Licensed, insured, firefighter owned.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Residential Pressure Washing",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/residential`,
+  description,
+};
+---
+<Layout title={title} description={description} path="/residential" jsonLd={jsonLd}>
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+      <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Residential Pressure Washing</span>
+      <h1 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Restore Your Home's Curb Appeal</h1>
+      <p class="mt-6 text-neutral-600 text-lg leading-relaxed">
+        TRL Soft Pressure Wash helps homeowners throughout Middle Tennessee keep their homes looking clean, bright,
+        and well maintained. Our professional exterior cleaning removes algae, mold, dirt, and grime without
+        damaging your home.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-2xl mb-14 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">What We Do</span>
+        <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Our Services</h2>
+        <p class="mt-4 text-neutral-500 text-lg">Every surface. Every time. Built on the same discipline we carry on the fireground.</p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <ServiceCard
+            href={s.href ?? `/services/${s.slug}`}
+            image={s.image}
+            eyebrow={s.eyebrow}
+            label={s.label}
+            description={s.description}
+            tag={s.tag}
+          />
+        ))}
+      </div>
+      <div class="text-center mt-14 reveal">
+        <p class="font-bold text-lg mb-5">Not sure what you need? We'll assess your property and recommend exactly what it needs — for free.</p>
+        <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">
+          Get a Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-xl mb-14 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Why Homeowners Choose TRL</span>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="border-l-2 border-red-600 pl-5 reveal">
+          <h3 class="font-extrabold uppercase text-lg mb-2">Licensed &amp; Insured</h3>
+          <p class="text-neutral-500">Your property is protected from the moment we arrive.</p>
+        </div>
+        <div class="border-l-2 border-red-600 pl-5 reveal">
+          <h3 class="font-extrabold uppercase text-lg mb-2">Attention to Detail</h3>
+          <p class="text-neutral-500">We treat every home like our own and never rush through a job.</p>
+        </div>
+        <div class="border-l-2 border-red-600 pl-5 reveal">
+          <h3 class="font-extrabold uppercase text-lg mb-2">Local Firefighter Owned</h3>
+          <p class="text-neutral-500">Proudly serving homeowners across Middle Tennessee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-black text-white text-center py-24 px-6">
+    <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Bring Back Your Home's Curb Appeal</h2>
+    <p class="text-neutral-300 max-w-2xl mx-auto mb-8 text-lg">
+      Our professional exterior cleaning removes algae, mold, and grime, helping your home look clean, safe, and
+      well maintained.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get Free Estimate</a>
+      <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
+    </div>
+    <p class="mt-6 text-neutral-400 text-sm uppercase tracking-widest">Proudly serving homeowners across Middle Tennessee</p>
+  </section>
+</Layout>

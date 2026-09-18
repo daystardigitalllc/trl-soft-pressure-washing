@@ -1,0 +1,91 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { business } from "../data/business.js";
+
+const title = "Commercial Pressure Washing Services | Middle Tennessee | TRL";
+const description =
+  "Reliable commercial exterior cleaning across Middle Tennessee — dumpster pads, HOA communities, storefronts, parking lots, awnings, and scheduled maintenance plans.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Commercial Pressure Washing",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/commercial`,
+  description,
+};
+
+const offerings = [
+  { title: "Dumpster Pad Cleaning", desc: "Dumpster areas collect grease, food waste, bacteria, and foul odors. Our high-pressure cleaning removes buildup, eliminates smells, and restores sanitation around your property." },
+  { title: "HOA Community Cleaning", desc: "We work with HOA boards and property managers to maintain sidewalks, pool decks, entryways, and community spaces — helping neighborhoods stay clean and welcoming." },
+  { title: "Storefront Cleaning", desc: "Your storefront is the first thing customers see. We remove gum, dirt, algae, and grime from sidewalks, entrances, and building fronts so your business looks professional." },
+  { title: "Parking Lot Cleaning", desc: "Oil stains, tire marks, and debris build up quickly in parking lots. Our commercial equipment removes buildup to keep your property clean, safe, and attractive." },
+  { title: "Awning Cleaning", desc: "Fabric and vinyl awnings collect mold, dirt, and pollution stains. Our soft washing method safely restores their appearance without damaging the material." },
+  { title: "Scheduled Maintenance Plans", desc: "Many commercial clients choose routine cleaning schedules to keep their property looking its best year-round. Monthly, quarterly, and annual service plans are available." },
+];
+---
+<Layout title={title} description={description} path="/commercial" jsonLd={jsonLd}>
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+      <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Commercial Pressure Washing</span>
+      <h1 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Professional Cleaning for Businesses &amp; Properties</h1>
+      <p class="mt-6 text-neutral-600 text-lg leading-relaxed">
+        TRL Soft Pressure Wash provides reliable commercial exterior cleaning services throughout Middle Tennessee.
+        From dumpster pads and storefronts to HOA communities and parking lots, we help businesses maintain a clean,
+        safe, and professional appearance.
+      </p>
+      <a href={business.smsHref} class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">
+        Request Commercial Quote
+      </a>
+    </div>
+  </section>
+
+  <section class="py-24 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {offerings.map((o) => (
+          <div class="bg-white border border-black/10 border-t-4 border-t-red-600 p-6 reveal">
+            <h3 class="font-extrabold uppercase text-lg mb-2">{o.title}</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed">{o.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-xl mb-14 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Why Businesses Choose TRL</span>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-3">
+        <div class="border-l-2 border-red-600 pl-5 reveal">
+          <h3 class="font-extrabold uppercase text-lg mb-2">Licensed &amp; Insured</h3>
+          <p class="text-neutral-500">Commercial properties require professionalism and protection. TRL Soft Pressure Wash is fully insured for peace of mind.</p>
+        </div>
+        <div class="border-l-2 border-red-600 pl-5 reveal">
+          <h3 class="font-extrabold uppercase text-lg mb-2">Flexible Scheduling</h3>
+          <p class="text-neutral-500">We work around your business hours with early morning, evening, or off-hour service to minimize disruption.</p>
+        </div>
+        <div class="border-l-2 border-red-600 pl-5 reveal">
+          <h3 class="font-extrabold uppercase text-lg mb-2">Local &amp; Reliable</h3>
+          <p class="text-neutral-500">Firefighter owned and locally operated, we take pride in delivering dependable service to businesses across Middle Tennessee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-black text-white text-center py-24 px-6">
+    <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Keep Your Property Looking Professional</h2>
+    <p class="text-neutral-300 max-w-2xl mx-auto mb-8 text-lg">
+      From dumpster pads and storefronts to parking lots and HOA communities, TRL Soft Pressure Wash helps
+      businesses maintain clean, safe, and welcoming properties.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Request Commercial Quote</a>
+      <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
+    </div>
+    <p class="mt-6 text-neutral-400 text-sm uppercase tracking-widest">Serving businesses throughout Middle Tennessee</p>
+  </section>
+</Layout>

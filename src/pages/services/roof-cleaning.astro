@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceLanding from "../../components/ServiceLanding.astro";
+import { business } from "../../data/business.js";
+
+const title = "Roof Cleaning Smyrna & Murfreesboro TN | Soft Wash Moss Removal | TRL";
+const description =
+  "Low-pressure roof soft washing removes black algae streaks, moss, and lichen across Smyrna, Murfreesboro, and Middle Tennessee — without damaging shingles.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Roof Soft Washing",
+  name: "Roof Cleaning",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/services/roof-cleaning`,
+  description,
+};
+---
+<Layout title={title} description={description} path="/services/roof-cleaning" jsonLd={jsonLd}>
+  <ServiceLanding
+    eyebrow="Low Pressure • Safe Roof Cleaning"
+    heroTitle="Restore Your Roof's Clean Look."
+    heroDesc="Black roof streaks are caused by algae that slowly damages shingles. Our soft washing process safely eliminates the growth and restores the appearance of your roof."
+    beforeAfter={{
+      before: "/images/roof/r1-b.jpg",
+      after: "/images/roof/r1-a.jpg",
+      title: "Roof Cleaning Transformation",
+      place: "Hohenwald, TN",
+      desc: "Gloeocapsa magma algae causing black streaks eliminated without voiding the roof warranty.",
+    }}
+    whyEyebrow="Roof Damage & Protection"
+    whyTitle="Why Roof Cleaning Is Critical in Tennessee"
+    whyIntro="Middle Tennessee's humid climate creates the perfect conditions for algae, moss, and lichen to grow on your roof. Over time, these contaminants stain shingles, trap moisture, and slowly break down roofing materials."
+    painPoints={[
+      { title: "Black Roof Streaks", desc: "The dark streaks you see on many roofs are caused by algae called Gloeocapsa Magma. It feeds on the limestone in shingles, leaving unsightly stains across your roof." },
+      { title: "Moss & Lichen Growth", desc: "Moss and lichen can grow between shingles and trap moisture against the roof surface, increasing the risk of long-term damage and premature roof wear." },
+      { title: "Shingle Deterioration", desc: "Organic growth holds moisture against your shingles, which can shorten the life of your roof and lead to expensive repairs if left untreated." },
+    ]}
+    processSteps={[
+      { title: "Roof Inspection & Property Protection", desc: "We begin by inspecting the roof for loose shingles, damaged areas, and heavy algae buildup. Landscaping and surrounding surfaces are pre-wet and protected to ensure plants and outdoor areas remain safe during the cleaning process." },
+      { title: "Professional Soft Wash Application", desc: "A specialized soft washing solution is applied to safely eliminate algae, mold, lichen, and black roof streaks. This low-pressure method cleans the roof without damaging shingles or removing protective granules." },
+      { title: "Algae Kill & Natural Rinse", desc: "The treatment continues working after application, breaking down organic growth at the root. Over the following days, rainfall naturally rinses away remaining residue, leaving your roof clean and restored." },
+    ]}
+    faqs={[
+      { q: "Will roof cleaning damage my shingles?", a: "No. We use a professional soft washing method specifically designed for roofs. This low-pressure process safely removes algae, moss, and buildup without damaging shingles or stripping protective granules." },
+      { q: "What causes the black streaks on my roof?", a: "The dark streaks you see on many roofs are caused by algae called Gloeocapsa Magma. It feeds on the limestone in shingles, leaving unsightly stains across your roof." },
+      { q: "Can you remove moss from my roof in Smyrna or Murfreesboro?", a: "Yes. Moss and lichen are extremely common on Middle Tennessee roofs due to the humidity and shade. Our soft wash treatment kills moss at the root and removes it safely without pressure that could crack or loosen shingles." },
+      { q: "How do I know if my roof has moss or just algae?", a: "Algae appears as dark grey or black streaks running down the slope of the roof. Moss grows in thick green or brown clumps, often along shaded ridges and valleys. Both are removed with our soft wash treatment." },
+      { q: "How long will my roof stay clean?", a: "Most roofs stay clean for 2–4 years depending on shade, moisture, and surrounding trees. Smyrna and Murfreesboro homes near tree lines may see regrowth sooner — regular maintenance cleaning keeps algae and moss from returning." },
+    ]}
+    closingTitle="Restore Your Roof's Clean Look"
+    closingDesc="Black roof streaks are caused by algae that slowly damages shingles. Our soft washing process eliminates the growth and restores the appearance of your roof."
+    footerNote="TRL Soft-Pressure Washing provides professional roof soft washing and moss removal services to homeowners across Smyrna, Murfreesboro, Mt. Juliet, Spring Hill, Columbia, Dickson, and the greater Middle Tennessee area. Middle Tennessee's humidity and tree cover make roofs especially prone to moss, algae, and black streak buildup — our soft wash process removes it safely and keeps it away longer."
+  />
+</Layout>

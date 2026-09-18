@@ -1,0 +1,33 @@
+---
+export interface Props {
+  faqs: { q: string; a: string }[];
+}
+const { faqs } = Astro.props as Props;
+---
+<div class="border-t border-gray-200" id="faqList">
+  {faqs.map((item, i) => (
+    <div class="faq-item border-b border-gray-200" data-open="false">
+      <button type="button" class="w-full py-6 flex justify-between items-center text-left group gap-6" aria-expanded="false" data-idx={i}>
+        <span class="text-lg font-bold uppercase group-hover:text-red-600 transition-colors">{item.q}</span>
+        <svg class="faq-icon w-6 h-6 text-gray-400 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+      </button>
+      <div class="faq-answer">
+        <p class="text-gray-600 leading-relaxed pb-6 max-w-3xl">{item.a}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>('#faqList .faq-item');
+  items.forEach((item) => {
+    const btn = item.querySelector('button');
+    const answer = item.querySelector<HTMLElement>('.faq-answer');
+    btn?.addEventListener('click', () => {
+      const isOpen = item.getAttribute('data-open') === 'true';
+      item.setAttribute('data-open', String(!isOpen));
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      if (answer) answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : '0px';
+    });
+  });
+</script>

@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Columbia TN | TRL Soft Pressure Washing";
+const description =
+  "Professional pressure washing for historic and modern homes in Columbia, TN. Licensed, insured, firefighter owned exterior cleaning.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Columbia, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Columbia", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/columbia-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Columbia, TN", item: `${business.siteUrl}/service-areas/columbia-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/columbia-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Columbia"
+    state="TN"
+    heading="Professional Pressure Washing in Columbia, TN"
+    intro="Columbia homeowners take pride in maintaining their property. Our pressure washing services help remove years of buildup from siding, concrete, and roofing."
+    intro2="From historic homes near the square to growing neighborhoods around town, we help Columbia residents maintain clean, beautiful properties."
+    offerings={[
+      { title: "Historic Home Soft Washing", desc: "Gentle exterior cleaning safe for older siding and masonry." },
+      { title: "Driveway Cleaning", desc: "High-powered surface cleaning for large concrete driveways." },
+      { title: "Roof Cleaning", desc: "Soft washing designed to remove black roof streaks." },
+    ]}
+    servingTitle="Serving the Columbia Area"
+    neighborhoods={[
+      "Historic downtown Columbia",
+      "Neighborhoods near Mule Town Square",
+      "Properties along Highway 31 and James Campbell Blvd",
+      "New subdivisions across Maury County",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

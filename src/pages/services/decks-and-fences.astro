@@ -1,0 +1,55 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceLanding from "../../components/ServiceLanding.astro";
+import { business } from "../../data/business.js";
+
+const title = "Deck and Fence Washing Hohenwald, TN | TRL Soft Wash";
+const description =
+  "Wood-safe deck and fence cleaning across Middle Tennessee. Remove algae, mildew, and gray weathering without damaging wood, composite, or vinyl.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Deck & Fence Cleaning",
+  name: "Deck & Fence Cleaning",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/services/decks-and-fences`,
+  description,
+};
+---
+<Layout title={title} description={description} path="/services/decks-and-fences" jsonLd={jsonLd}>
+  <ServiceLanding
+    eyebrow="Professional Wood Cleaning"
+    heroTitle="Bring Your Deck Back to Life"
+    heroDesc="Remove slippery algae, mildew, and years of grime from your deck and fence with our safe wood-cleaning process."
+    beforeAfter={{
+      before: "/images/deck/d1-b.jpg",
+      after: "/images/deck/d1-a.jpg",
+      title: "Deck Cleaning Results",
+      place: "Middle Tennessee",
+      desc: "Gray, weathered wood restored to a bright, refreshed finish ready for staining or everyday use.",
+    }}
+    whyEyebrow="Wood Damage & Safety"
+    whyTitle="Why Deck Cleaning Matters in Tennessee"
+    whyIntro="Middle Tennessee's humidity, shade, and rain create the perfect conditions for algae, mildew, and grime to build up on decks and fences. Without proper cleaning, wood surfaces become slippery, discolored, and slowly deteriorate."
+    painPoints={[
+      { title: "Gray Weathered Wood", desc: "Over time, sun exposure and moisture cause wood to turn gray and dull. Professional cleaning restores the natural look of your deck and fence." },
+      { title: "Algae & Mildew Growth", desc: "Algae and mildew thrive in shaded and damp areas, leaving dark stains across wood surfaces and accelerating deterioration." },
+      { title: "Slippery Deck Surfaces", desc: "Algae-covered decks become extremely slick when wet, creating a dangerous slipping hazard for family and guests." },
+    ]}
+    processSteps={[
+      { title: "Inspect & Prepare the Surface", desc: "We begin by inspecting the deck or fence for loose boards, nails, and areas with heavy algae or mildew buildup. Surrounding landscaping is pre-wet and protected to ensure plants and nearby surfaces remain safe during the cleaning process." },
+      { title: "Wood-Safe Cleaning Treatment", desc: "A professional cleaning solution is applied to break down algae, mold, mildew, and gray weathering from the wood surface. This treatment helps lift stains and organic buildup without damaging the wood fibers." },
+      { title: "Gentle Rinse & Restoration", desc: "We gently rinse the deck or fence using controlled pressure designed for wood surfaces. This removes the loosened buildup while preserving the natural grain and leaving the wood looking clean and refreshed." },
+    ]}
+    faqs={[
+      { q: "Will pressure washing damage my deck or fence?", a: "No. We use controlled pressure and wood-safe cleaning solutions designed specifically for decks and fences. This removes algae, mildew, and grime without damaging the wood fibers or causing splintering." },
+      { q: "Will cleaning restore the natural color of the wood?", a: "Professional cleaning removes algae, mildew, dirt, and gray weathering from the surface of the wood. While heavily aged wood may not return to its original color completely, most decks and fences look dramatically brighter after cleaning." },
+      { q: "How often should I clean my deck or fence?", a: "In Middle Tennessee's humid climate, decks and fences should typically be cleaned every 1–2 years. Regular cleaning prevents algae buildup, keeps the surface safer to walk on, and helps extend the life of the wood." },
+      { q: "Is my deck slippery because of algae?", a: "Yes. Algae and mildew commonly grow on wood surfaces in shaded and damp areas, making decks extremely slippery when wet. Professional cleaning removes this buildup and helps restore safe footing." },
+    ]}
+    closingTitle="Restore Your Deck & Fence"
+    closingDesc="Our professional cleaning removes algae, mildew, and gray weathering — restoring the natural beauty of your wood surfaces."
+  />
+</Layout>

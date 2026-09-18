@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Summertown TN | TRL Soft Pressure Washing";
+const description =
+  "Trusted pressure washing for wooded, shaded homes in Summertown, TN and Lawrence County. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Summertown, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Summertown", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/summertown-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Summertown, TN", item: `${business.siteUrl}/service-areas/summertown-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/summertown-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Summertown"
+    state="TN"
+    heading="Trusted Pressure Washing in Summertown, TN"
+    intro="Homes in Summertown often sit in wooded areas where shade and moisture allow algae and mildew to grow quickly. Our professional pressure washing removes buildup safely while protecting your home."
+    intro2="Whether you live near the Summertown square or on acreage outside town, we provide reliable exterior cleaning for homes across Lawrence County."
+    offerings={[
+      { title: "House Washing", desc: "Low-pressure soft washing that removes algae, mold, and dirt from siding." },
+      { title: "Driveway Cleaning", desc: "Professional surface cleaning that restores concrete driveways and walkways." },
+      { title: "Deck & Patio Cleaning", desc: "Safe cleaning for outdoor living areas including decks and patios." },
+    ]}
+    servingTitle="Serving Summertown Area Homes"
+    neighborhoods={[
+      "Downtown Summertown neighborhoods",
+      "Homes along Highway 20",
+      "Rural properties across Lawrence County",
+      "Homes near Summertown schools and surrounding communities",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

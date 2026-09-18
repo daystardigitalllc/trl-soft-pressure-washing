@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs } from "../../data/business.js";
+
+const title = "Pressure Washing Spring Hill TN | TRL Soft Pressure Washing";
+const description =
+  "Top rated pressure washing for Spring Hill, TN homes — new subdivisions and rural properties alike. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Spring Hill, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Spring Hill", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/spring-hill-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Spring Hill, TN", item: `${business.siteUrl}/service-areas/spring-hill-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/spring-hill-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Spring Hill"
+    state="TN"
+    heading="Top Rated Pressure Washing in Spring Hill, TN"
+    intro="Spring Hill continues to grow rapidly, and keeping homes looking their best is important for property value. Our professional pressure washing services remove dirt, algae, and buildup safely."
+    intro2="Whether you live in a newer subdivision or a rural property outside town, our equipment handles everything from delicate siding to large concrete surfaces."
+    offerings={[
+      { title: "House Washing", desc: "Soft washing designed to protect siding while removing algae and grime." },
+      { title: "Driveway Cleaning", desc: "High-powered surface cleaning for concrete driveways and walkways." },
+      { title: "Patio & Pool Deck Cleaning", desc: "Restore outdoor living spaces safely and effectively." },
+    ]}
+    servingTitle="Serving Spring Hill Neighborhoods"
+    neighborhoods={[
+      "Cherry Grove, Campbell Station, and Autumn Ridge",
+      "Neighborhoods near GM Ultium Cells",
+      "Homes along Port Royal Road and Kedron Road",
+      "Spring Hill communities across Maury and Williamson Counties",
+    ]}
+    faqs={homeFaqs}
+  />
+</Layout>

@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceLanding from "../../components/ServiceLanding.astro";
+import { business } from "../../data/business.js";
+
+const title = "Concrete Pressure Washing & Sealing Mt. Juliet | TRL Soft Wash";
+const description =
+  "Industrial-grade concrete cleaning and sealing for driveways, walkways, and pool decks across Middle Tennessee. Remove algae, oil stains, and buildup safely.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: "Concrete & Driveway Cleaning",
+  name: "Driveway & Concrete Cleaning",
+  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+  areaServed: business.areaServed,
+  url: `${business.siteUrl}/services/concrete`,
+  description,
+};
+---
+<Layout title={title} description={description} path="/services/concrete" jsonLd={jsonLd}>
+  <ServiceLanding
+    eyebrow="Industrial Strength Protection"
+    heroTitle="Tennessee's Concrete Restoration."
+    heroDesc="We don't just spray your driveway. We use industrial-grade surface cleaners and deep-penetrating sealers to protect your investment."
+    beforeAfter={{
+      before: "/images/driveway/d1-b.jpg",
+      after: "/images/driveway/d1-a.jpg",
+      title: "Driveway Restoration",
+      place: "Hohenwald, TN",
+      desc: "Deep oil stains, tire marks, and years of embedded grime blasted away in under two hours.",
+    }}
+    whyEyebrow="Surface Damage & Safety"
+    whyTitle="Why Concrete Cleaning Matters in Tennessee"
+    whyIntro="Tennessee's humidity and shade create the perfect environment for algae, mold, and grime to grow on concrete. Without professional cleaning, your driveway and walkways can become slippery, stained, and slowly deteriorate over time."
+    painPoints={[
+      { title: "Algae & Mold Growth", desc: "Green and black algae thrive in Tennessee humidity, leaving driveways and walkways dark, stained, and unhealthy." },
+      { title: "Slip Hazard Surfaces", desc: "Algae-covered concrete becomes extremely slick when wet, increasing the risk of slips and falls for family and guests." },
+      { title: "Deep Stain Buildup", desc: "Oil, dirt, and organic buildup penetrate concrete pores over time, causing permanent discoloration if not professionally cleaned." },
+    ]}
+    processSteps={[
+      { title: "Inspect & Protect", desc: "Before starting, we inspect the concrete for cracks, previous sealers, and heavy stains. We also pre-wet surrounding landscaping and protect nearby surfaces to ensure plants, siding, and outdoor fixtures remain safe during the cleaning process." },
+      { title: "Deep Surface Cleaning", desc: "Using commercial surface cleaners and controlled pressure, we remove dirt, algae, mold, and grime from the concrete. This method ensures an even clean without leaving “wand marks” or damaging the surface." },
+      { title: "Final Rinse & Quality Check", desc: "After the main cleaning, we perform a detailed rinse and address any remaining stains if possible. The area is inspected for consistency so your driveway, walkway, or patio looks clean, bright, and refreshed." },
+    ]}
+    faqs={[
+      { q: "Will all stains come out of my driveway?", a: "Most stains such as dirt, algae, mildew, and organic buildup come off very well with professional cleaning. Some deep stains like rust, oil, or old chemical spills may lighten but not disappear completely. During our inspection we'll let you know what results to expect before we begin." },
+      { q: "How long will my concrete stay clean?", a: "For most homes, concrete stays clean for 12–24 months depending on shade, moisture, and surrounding trees. Areas with heavy shade or moisture may develop algae sooner. Regular maintenance cleanings can keep your driveway and walkways looking fresh year-round." },
+      { q: "How often should I seal?", a: "In Middle Tennessee, we recommend cleaning every 2 years and re-sealing every 3-5 years depending on sun exposure." },
+    ]}
+    closingTitle="Ready to Restore Your Driveway?"
+    closingDesc="Don't wait for cracks to appear. Get a professional deep clean and industrial seal today."
+  />
+</Layout>
