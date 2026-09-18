@@ -11,6 +11,7 @@ export interface Props {
   ogImage?: string;
   jsonLd?: Record<string, any> | Record<string, any>[];
   noHeaderFooter?: boolean;
+  darkHeader?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   ogImage = "/images/about/TRL.jpg",
   jsonLd,
   noHeaderFooter = false,
+  darkHeader = false,
 } = Astro.props as Props;
 
 const canonical = new URL(path, business.siteUrl).toString();
@@ -53,7 +55,7 @@ const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     ))}
   </head>
   <body>
-    {!noHeaderFooter && <Header />}
+    {!noHeaderFooter && <Header dark={darkHeader} />}
     <main>
       <slot />
     </main>

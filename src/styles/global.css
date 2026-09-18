@@ -17,7 +17,9 @@ body {
 }
 
 img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+@layer base {
+  a { color: inherit; text-decoration: none; }
+}
 
 /* Scroll-reveal */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -111,12 +113,42 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-sweep:hover::before { transform: scaleX(1); }
 
-/* Header shadow once scrolled */
+/* Header: transparent over the page until scrolled, then a solid backdrop.
+   Text/logo colors default to dark (for light-hero pages) unless the
+   header is explicitly marked --dark (pages with a dark hero at top),
+   in which case they start white and always flip to dark once scrolled. */
+.hdr-brand-text,
+.hdr-tagline {
+  color: #000;
+}
+.hdr-tagline {
+  color: #737373;
+}
+.hdr-nav-link {
+  color: #737373;
+}
+.hdr-hamburger-bar {
+  background-color: #000;
+}
+
+.site-header--dark .hdr-brand-text,
+.site-header--dark .hdr-tagline,
+.site-header--dark .hdr-nav-link {
+  color: #fff;
+}
+.site-header--dark .hdr-hamburger-bar {
+  background-color: #fff;
+}
+
 .site-header.is-scrolled {
   background: rgba(255,255,255,0.95);
   backdrop-filter: saturate(180%) blur(10px);
   box-shadow: 0 1px 0 rgba(0,0,0,0.06);
 }
+.site-header.is-scrolled .hdr-brand-text { color: #000 !important; }
+.site-header.is-scrolled .hdr-tagline,
+.site-header.is-scrolled .hdr-nav-link { color: #737373 !important; }
+.site-header.is-scrolled .hdr-hamburger-bar { background-color: #000 !important; }
 
 /* FAQ accordion */
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }

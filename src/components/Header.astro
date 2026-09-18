@@ -1,21 +1,26 @@
 ---
 import { business, mainNav } from "../data/business.js";
+
+export interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props as Props;
 ---
-<header class="site-header fixed top-0 left-0 w-full z-50 transition-all duration-300 py-5" id="siteHeader">
+<header class:list={["site-header fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 sm:py-5", dark && "site-header--dark"]} id="siteHeader">
   <div class="max-w-[1280px] mx-auto px-6 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3 group">
-      <img alt="TRL Soft Pressure Wash" class="h-14 w-auto" src={business.logo} width="56" height="56" />
-      <div class="flex flex-col leading-none">
-        <span class="text-black uppercase tracking-wide font-black text-[1rem]">
-          <span class="text-red-600">TRL</span> Soft Pressure Washing
+      <img alt="TRL Soft Pressure Wash" class="h-10 sm:h-14 w-auto shrink-0" src={business.logo} width="56" height="56" />
+      <div class="flex flex-col leading-none min-w-0">
+        <span class="hdr-brand-text uppercase tracking-wide font-black text-[0.9rem] sm:text-[1rem] whitespace-nowrap">
+          <span class="text-red-600">TRL</span> <span class="hidden sm:inline">Soft Pressure Washing</span><span class="sm:hidden">Soft Wash</span>
         </span>
-        <span class="text-neutral-500 uppercase text-[0.6rem] tracking-[0.2em] mt-[2px]">Thin Red Line · Firefighter Owned</span>
+        <span class="hdr-tagline hidden sm:block uppercase text-[0.6rem] tracking-[0.2em] mt-[2px] whitespace-nowrap">Thin Red Line · Firefighter Owned</span>
       </div>
     </a>
 
     <nav class="hidden lg:flex items-center gap-1" aria-label="Primary">
       {mainNav.map((item) => (
-        <a href={item.href} class="relative px-3.5 py-1.5 rounded text-neutral-500 hover:text-red-600 transition group uppercase tracking-[0.08em] text-[0.9rem] font-semibold">
+        <a href={item.href} class="hdr-nav-link relative px-3.5 py-1.5 rounded hover:text-red-600 transition group uppercase tracking-[0.08em] text-[0.9rem] font-semibold">
           {item.label}
           <span class="absolute bottom-0 left-3.5 right-3.5 h-[2px] bg-red-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
         </a>
@@ -27,9 +32,9 @@ import { business, mainNav } from "../data/business.js";
     </nav>
 
     <button class="lg:hidden flex flex-col gap-[5px] z-[101]" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
-      <span class="block w-6 h-[2px] bg-black transition"></span>
-      <span class="block w-6 h-[2px] bg-black transition"></span>
-      <span class="block w-6 h-[2px] bg-black transition"></span>
+      <span class="hdr-hamburger-bar block w-6 h-[2px] transition"></span>
+      <span class="hdr-hamburger-bar block w-6 h-[2px] transition"></span>
+      <span class="hdr-hamburger-bar block w-6 h-[2px] transition"></span>
     </button>
   </div>
 
