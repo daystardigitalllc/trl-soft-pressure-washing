@@ -8,10 +8,10 @@ export interface Props {
 const { before, after } = Astro.props as Props;
 ---
 <section class="hero-wash relative bg-black -mt-24">
-  <div class="hero-wash__sticky sticky top-0 h-screen overflow-hidden pt-24">
+  <div class="hero-wash__sticky sticky top-0 h-[78vh] overflow-hidden pt-24">
     <img class="absolute inset-0 w-full h-full object-cover" src={before} alt="House before cleaning" />
     <div class="hero-wash__after-wrap absolute top-0 left-0 w-full overflow-hidden" style="height: 0%;">
-      <img class="absolute top-0 left-0 w-full h-screen object-cover" src={after} alt="House after cleaning" />
+      <img class="absolute top-0 left-0 w-full h-[78vh] object-cover" src={after} alt="House after cleaning" />
     </div>
     <div class="absolute inset-0 lg:hidden bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.82)_55%,rgba(0,0,0,0.55)_78%,rgba(0,0,0,0.2)_92%,transparent_100%)]"></div>
     <div class="absolute inset-0 hidden lg:block bg-[linear-gradient(to_right,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.78)_26%,rgba(0,0,0,0.45)_42%,rgba(0,0,0,0.15)_58%,rgba(0,0,0,0.02)_72%,transparent_85%)]"></div>
@@ -63,7 +63,7 @@ const { before, after } = Astro.props as Props;
 
 <style>
   .hero-wash {
-    height: 240vh;
+    height: 92vh;
   }
   .hero-wash__stream-path {
     animation: hero-stream-flow 0.5s linear infinite;
@@ -92,8 +92,9 @@ const { before, after } = Astro.props as Props;
 <script>
   function initHeroWash() {
     const section = document.querySelector<HTMLElement>(".hero-wash");
+    const sticky = document.querySelector<HTMLElement>(".hero-wash__sticky");
     const afterWrap = document.querySelector<HTMLElement>(".hero-wash__after-wrap");
-    if (!section || !afterWrap || section.dataset.init) return;
+    if (!section || !sticky || !afterWrap || section.dataset.init) return;
     section.dataset.init = "true";
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -107,7 +108,7 @@ const { before, after } = Astro.props as Props;
     const update = () => {
       ticking = false;
       const rect = section.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
+      const total = rect.height - sticky.offsetHeight;
       const progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
 
       // House reveals from the top down as the visitor scrolls through the hero.
