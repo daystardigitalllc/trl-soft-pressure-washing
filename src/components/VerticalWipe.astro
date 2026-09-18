@@ -1,0 +1,127 @@
+---
+export interface Props {
+  before: string;
+  after: string;
+}
+const { before, after } = Astro.props as Props;
+---
+<section class="wipe relative bg-black">
+  <div class="wipe__sticky sticky top-0 h-screen overflow-hidden">
+    <img class="absolute inset-0 w-full h-full object-cover" src={before} alt="Dirty siding before soft washing" />
+    <div class="wipe__after-wrap absolute top-0 left-0 w-full overflow-hidden" style="height: 0%;">
+      <img class="absolute top-0 left-0 w-full h-screen object-cover" src={after} alt="Clean siding after soft washing" />
+    </div>
+
+    <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55)_0%,rgba(0,0,0,0.15)_30%,transparent_55%)]"></div>
+
+    <div class="wipe__boundary absolute left-0 w-full z-20" style="top: 0%;">
+      <div class="wipe__mist absolute inset-x-0 -top-5 h-10"></div>
+      <div class="wipe__line absolute inset-x-0 top-0 h-[2px]"></div>
+      <span class="wipe__drop" style="left:12%; animation-delay:0s;"></span>
+      <span class="wipe__drop" style="left:28%; animation-delay:0.6s;"></span>
+      <span class="wipe__drop" style="left:47%; animation-delay:0.2s;"></span>
+      <span class="wipe__drop" style="left:64%; animation-delay:0.9s;"></span>
+      <span class="wipe__drop" style="left:81%; animation-delay:0.4s;"></span>
+      <img
+        class="wipe__hose absolute -top-[70px] w-[190px] sm:w-[260px] drop-shadow-[0_10px_16px_rgba(0,0,0,0.45)]"
+        style="right: 2%;"
+        src="/images/hose.png"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
+
+    <div class="relative z-10 h-full w-full max-w-[1280px] mx-auto px-7 flex items-end pb-20">
+      <div class="max-w-[520px]">
+        <span class="inline-flex items-center gap-2 px-4 py-2 mb-4 text-xs font-bold tracking-[0.22em] uppercase border rounded-lg bg-white/10 border-white/30 text-white backdrop-blur-sm">Watch It Work</span>
+        <h2 class="mb-4 font-black uppercase leading-[0.95] tracking-tight text-white text-[clamp(2.2rem,5vw,3.6rem)]">
+          Keep scrolling.<br />Watch it disappear.
+        </h2>
+        <p class="text-neutral-200 leading-relaxed max-w-[420px]">
+          Years of algae, mold, and grime — gone in a single soft wash pass. No pressure damage, no shortcuts, just a deep clean that lasts.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wipe {
+    height: 220vh;
+  }
+  .wipe__mist {
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.55));
+    filter: blur(6px);
+  }
+  .wipe__line {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 14px 2px rgba(180, 225, 255, 0.8), 0 0 32px 6px rgba(120, 200, 255, 0.35);
+    animation: wipe-ripple 1.8s ease-in-out infinite;
+  }
+  @keyframes wipe-ripple {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
+  }
+  .wipe__drop {
+    position: absolute;
+    top: -4px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(200, 235, 255, 0.9);
+    box-shadow: 0 0 4px rgba(200, 235, 255, 0.8);
+    animation: wipe-drop 1.4s ease-in infinite;
+  }
+  @keyframes wipe-drop {
+    0% { transform: translateY(0) scale(1); opacity: 0.9; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(34px) scale(0.4); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wipe__line { animation: none; }
+    .wipe__drop { display: none; }
+  }
+</style>
+
+<script>
+  function initWipe() {
+    const section = document.querySelector<HTMLElement>(".wipe");
+    const sticky = document.querySelector<HTMLElement>(".wipe__sticky");
+    const afterWrap = document.querySelector<HTMLElement>(".wipe__after-wrap");
+    const boundary = document.querySelector<HTMLElement>(".wipe__boundary");
+    if (!section || !sticky || !afterWrap || !boundary || section.dataset.init) return;
+    section.dataset.init = "true";
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      afterWrap.style.height = "100%";
+      boundary.style.top = "100%";
+      return;
+    }
+
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const rect = section.getBoundingClientRect();
+      const total = rect.height - sticky.offsetHeight;
+      const progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
+      const revealPct = Math.min(100, Math.max(0, progress * 100));
+      afterWrap.style.height = `${revealPct}%`;
+      boundary.style.top = `${revealPct}%`;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+  document.addEventListener("DOMContentLoaded", initWipe);
+  initWipe();
+</script>

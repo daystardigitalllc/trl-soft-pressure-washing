@@ -26,7 +26,7 @@ const { city, state, heading, intro, intro2, offerings, servingTitle, neighborho
     <h1 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">{heading}</h1>
     <p class="mt-6 text-neutral-600 text-lg leading-relaxed">{intro}</p>
     <p class="mt-4 text-neutral-600 text-lg leading-relaxed">{intro2}</p>
-    <a href={business.smsHref} class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">
+    <a href="/estimate" class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">
       Get a Free Quote
     </a>
   </div>
@@ -75,7 +75,7 @@ const { city, state, heading, intro, intro2, offerings, servingTitle, neighborho
   <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Ready to Restore Your {city} Property?</h2>
   <p class="text-neutral-300 max-w-2xl mx-auto mb-8 text-lg">Licensed, insured, and firefighter owned — proudly serving {city}, {state} and all of Middle Tennessee.</p>
   <div class="flex flex-wrap justify-center gap-4">
-    <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
+    <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
     <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
   </div>
 </section>

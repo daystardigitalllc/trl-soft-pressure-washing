@@ -6,6 +6,7 @@ import BeforeAfter from "../components/BeforeAfter.astro";
 import ServiceCard from "../components/ServiceCard.astro";
 import Testimonials from "../components/Testimonials.astro";
 import QuoteForm from "../components/QuoteForm.astro";
+import VerticalWipe from "../components/VerticalWipe.astro";
 import { business, services, homeFaqs, reviews } from "../data/business.js";
 
 const title = "TRL Soft Pressure Washing | Middle Tennessee's Trusted Exterior Cleaning Experts";
@@ -109,12 +110,14 @@ const beforeAfters = [
       </div>
       <div class="text-center mt-14 reveal">
         <p class="font-bold text-lg mb-5">Not sure what you need? We'll assess your property and recommend exactly what it needs — for free.</p>
-        <a href={business.smsHref} class="btn-sweep inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:text-white">
+        <a href="/estimate" class="btn-sweep inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:text-white">
           Get a Free Quote
         </a>
       </div>
     </div>
   </section>
+
+  <VerticalWipe before="/images/house/h3-b.jpg" after="/images/house/h3-a.jpg" />
 
   <section class="py-24 bg-black text-white">
     <div class="max-w-7xl mx-auto px-6 grid gap-14 lg:grid-cols-2 items-center">
@@ -126,7 +129,7 @@ const beforeAfters = [
           property's curb appeal, using advanced soft-wash techniques that ensure a deep clean without the damage
           of high pressure.
         </p>
-        <a href={business.smsHref} class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">
+        <a href="/estimate" class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">
           Get Your Free Estimate
         </a>
       </div>
@@ -207,7 +210,7 @@ const beforeAfters = [
     <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Ready to restore your property?</h2>
     <p class="text-neutral-300 max-w-xl mx-auto mb-8 text-lg">Licensed, insured, and firefighter owned — serving Middle Tennessee with the same discipline we carry on the line.</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href="#quote" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
+      <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
       <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
     </div>
   </section>

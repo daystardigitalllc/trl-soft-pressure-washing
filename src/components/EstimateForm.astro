@@ -1,0 +1,136 @@
+---
+import { business } from "../data/business.js";
+
+const services = [
+  { value: "vinyl", label: "Vinyl House Wash" },
+  { value: "brick", label: "Brick House Wash" },
+  { value: "roof", label: "Roof Cleaning (Metal or Shingle)" },
+  { value: "concrete", label: "Concrete / Driveway / Sidewalks" },
+  { value: "wood", label: "Wood Deck / Fence" },
+];
+---
+<div id="estimateWrap" class="max-w-xl">
+  <form id="estimateForm" class="grid gap-4" novalidate>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="ef-name" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Name *</label>
+        <input id="ef-name" name="name" type="text" required class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+      </div>
+      <div>
+        <label for="ef-phone" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Phone</label>
+        <input id="ef-phone" name="phone" type="tel" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+      </div>
+    </div>
+    <div>
+      <label for="ef-email" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Email</label>
+      <input id="ef-email" name="email" type="email" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+    </div>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div>
+        <label for="ef-service" class="block text-xs font-bold uppercase tracking-wider mb-1.5">What Needs Washed? *</label>
+        <select id="ef-service" name="service" required class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white">
+          <option value="">Select one</option>
+          {services.map((s) => <option value={s.value}>{s.label}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="ef-sqft" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Approx. Square Footage *</label>
+        <input id="ef-sqft" name="sqft" type="number" min="1" step="1" inputmode="numeric" placeholder="e.g. 1800" required class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white" />
+      </div>
+    </div>
+    <div>
+      <label for="ef-notes" class="block text-xs font-bold uppercase tracking-wider mb-1.5">Anything Else We Should Know?</label>
+      <textarea id="ef-notes" name="notes" rows="3" class="w-full border-2 border-black/15 focus:border-red-600 outline-none px-4 py-3 bg-white"></textarea>
+    </div>
+    <input type="text" name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+    <div>
+      <button type="submit" id="efSubmit" class="btn-sweep inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:text-white disabled:opacity-60">
+        Get My Instant Estimate
+      </button>
+    </div>
+    <p id="efStatus" class="text-sm font-semibold" role="status"></p>
+  </form>
+
+  <div id="estimateResult" class="hidden border-2 border-red-600 bg-white p-8 text-center">
+    <span class="inline-block text-xs font-bold tracking-[0.2em] uppercase text-red-600 mb-3">Your Instant Estimate</span>
+    <div class="font-black text-4xl sm:text-5xl mb-3">
+      $<span id="erLow">0</span> &ndash; $<span id="erHigh">0</span>
+    </div>
+    <p class="text-neutral-500 mb-6">This is a ballpark range based on typical jobs of this size. We'll confirm your exact price with a free, no-obligation on-site walkthrough.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href={business.smsHref} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Text to Book</a>
+      <a href={business.phoneHref} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">Call {business.phoneDisplay}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initEstimateForm() {
+    const form = document.getElementById("estimateForm") as HTMLFormElement | null;
+    if (!form || form.dataset.init) return;
+    form.dataset.init = "true";
+    const status = document.getElementById("efStatus");
+    const submitBtn = document.getElementById("efSubmit") as HTMLButtonElement | null;
+    const result = document.getElementById("estimateResult");
+    const low = document.getElementById("erLow");
+    const high = document.getElementById("erHigh");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (status) status.textContent = "";
+
+      const nameEl = form.querySelector<HTMLInputElement>("[name=name]");
+      const emailEl = form.querySelector<HTMLInputElement>("[name=email]");
+      const phoneEl = form.querySelector<HTMLInputElement>("[name=phone]");
+      const serviceEl = form.querySelector<HTMLSelectElement>("[name=service]");
+      const sqftEl = form.querySelector<HTMLInputElement>("[name=sqft]");
+
+      if (!nameEl?.value.trim() || (!emailEl?.value.trim() && !phoneEl?.value.trim())) {
+        if (status) {
+          status.textContent = "Please enter your name and either an email or phone number.";
+          status.className = "text-sm font-semibold text-red-600";
+        }
+        return;
+      }
+      if (!serviceEl?.value || !sqftEl?.value || Number(sqftEl.value) <= 0) {
+        if (status) {
+          status.textContent = "Please select a service and enter your square footage.";
+          status.className = "text-sm font-semibold text-red-600";
+        }
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (submitBtn) submitBtn.disabled = true;
+      if (status) {
+        status.textContent = "Calculating...";
+        status.className = "text-sm font-semibold text-neutral-500";
+      }
+
+      try {
+        const res = await fetch("/api/estimate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(body.error || "Something went wrong.");
+
+        if (low) low.textContent = String(body.low);
+        if (high) high.textContent = String(body.high);
+        form.classList.add("hidden");
+        result?.classList.remove("hidden");
+        if (status) status.textContent = "";
+      } catch (err) {
+        if (status) {
+          status.textContent = err instanceof Error ? err.message : "Something went wrong. Please call or text us instead.";
+          status.className = "text-sm font-semibold text-red-600";
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", initEstimateForm);
+  initEstimateForm();
+</script>

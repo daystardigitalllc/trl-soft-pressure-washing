@@ -41,7 +41,7 @@ const {
     <h1 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">{heroTitle}</h1>
     <p class="mt-6 text-neutral-600 text-lg leading-relaxed max-w-xl">{heroDesc}</p>
     <div class="flex flex-wrap gap-4 mt-8">
-      <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Get My Free Quote</a>
+      <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Get My Free Quote</a>
       <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">Call Now</a>
     </div>
   </div>
@@ -102,7 +102,7 @@ const {
   <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">{closingTitle}</h2>
   <p class="text-neutral-300 max-w-2xl mx-auto mb-8 text-lg">{closingDesc}</p>
   <div class="flex flex-wrap justify-center gap-4">
-    <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get My Free Quote</a>
+    <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get My Free Quote</a>
     <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
   </div>
   {footerNote && <p class="mt-8 text-neutral-500 text-xs max-w-3xl mx-auto uppercase tracking-wide leading-relaxed">{footerNote}</p>}
