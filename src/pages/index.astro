@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Marquee from "../components/Marquee.astro";
-import WashScroll from "../components/WashScroll.astro";
+import HeroWash from "../components/HeroWash.astro";
 import Faq from "../components/Faq.astro";
 import BeforeAfter from "../components/BeforeAfter.astro";
 import ServiceCard from "../components/ServiceCard.astro";
@@ -87,41 +87,7 @@ const beforeAfters = [
 ];
 ---
 <Layout title={title} description={description} path="/" jsonLd={jsonLd}>
-  <section class="relative flex items-center min-h-screen overflow-hidden bg-white -mt-24 pt-24">
-    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_60%_70%_at_15%_55%,rgba(204,17,17,0.06)_0%,transparent_65%),radial-gradient(ellipse_40%_40%_at_85%_20%,rgba(204,17,17,0.04)_0%,transparent_60%),linear-gradient(135deg,#ffffff_0%,#fafafa_60%,#f5f5f5_100%)]"></div>
-    <div class="absolute top-0 right-0 hidden h-full pointer-events-none lg:block w-[52%] [clip-path:polygon(18%_0%,100%_0%,100%_100%,0%_100%)]">
-      <img alt="Mike Hobbs, firefighter and owner of TRL Soft Pressure Wash" class="absolute inset-0 object-cover w-full h-full opacity-90 object-top" src="/images/about/mikehobbs.jpg" />
-      <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_65%_45%,rgba(204,17,17,0.06)_0%,transparent_70%)]"></div>
-    </div>
-    <div class="relative z-10 w-full max-w-[1280px] px-7 mx-auto pt-[clamp(60px,10vh,100px)] pb-[clamp(80px,12vh,120px)]">
-      <div class="max-w-[580px]">
-        <div class="inline-flex items-center gap-2 px-4 py-2 mb-5 text-xs font-bold tracking-[0.22em] uppercase border rounded-lg bg-red-600/10 border-red-600/40 text-black">Firefighter Owned &amp; Operated</div>
-        <h1 class="mb-5 font-black uppercase leading-[0.9] tracking-tight">
-          <span class="block text-[clamp(3rem,6.5vw,5.8rem)] text-red-600">Restore.</span>
-          <span class="block text-[clamp(3rem,6.5vw,5.8rem)] text-black">Refresh.</span>
-          <span class="block mt-2 text-[clamp(1.5rem,2.8vw,2.5rem)] font-semibold text-neutral-500">Soft Pressure Washing</span>
-        </h1>
-        <p class="max-w-[440px] mb-9 text-neutral-500 leading-relaxed">
-          Residential &amp; commercial soft wash and pressure cleaning — safe, thorough, and built on the same commitment to service we carry on the line. Licensed. Insured. 100% satisfaction guaranteed.
-        </p>
-        <div class="flex flex-wrap items-center gap-4 mb-12">
-          <a href={business.smsHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600 hover:-translate-y-0.5 shadow-lg shadow-red-600/30">
-            Get a Free Quote
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path></svg>
-          </a>
-          <a href="#services" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">
-            Our Services ›
-          </a>
-        </div>
-        <div class="flex items-center gap-3 text-sm font-semibold text-neutral-500">
-          <span>Google Rating 5.0</span>
-          <span class="text-red-600 tracking-[2px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <WashScroll before="/images/house/h2-b.jpg" after="/images/house/h2-a.jpg" />
+  <HeroWash before="/images/house/h2-b.jpg" after="/images/house/h2-a.jpg" />
 
   <Marquee />
 
