@@ -7,16 +7,41 @@ const title = "Gutter Cleaning Hohenwald, TN | TRL Soft Wash";
 const description =
   "Professional gutter cleaning across Middle Tennessee. We clear debris and flush downspouts to stop water damage before it starts.";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Gutter Cleaning",
-  name: "Gutters & Window Cleaning",
-  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
-  areaServed: business.areaServed,
-  url: `${business.siteUrl}/services/gutters-windows`,
-  description,
-};
+const faqs = [
+  { q: "How often should gutters be cleaned?", a: "Most homes in Middle Tennessee should have their gutters cleaned at least once or twice a year. Homes with many surrounding trees may require more frequent cleaning to prevent leaves and debris from clogging the system." },
+  { q: "What happens if my gutters are clogged?", a: "Clogged gutters prevent rainwater from draining properly. This can cause water to overflow and damage your roof, siding, landscaping, and even your home's foundation." },
+  { q: "Do you clean downspouts as well?", a: "Yes. After removing debris from the gutters, we flush the entire system and clear the downspouts to ensure water flows freely away from your home." },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Gutter Cleaning",
+    name: "Gutters & Window Cleaning",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: business.areaServed,
+    url: `${business.siteUrl}/services/gutters-windows`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Gutters & Window Cleaning", item: `${business.siteUrl}/services/gutters-windows` },
+    ],
+  },
+];
 ---
 <Layout title={title} description={description} path="/services/gutters-windows" jsonLd={jsonLd}>
   <ServiceLanding
@@ -43,11 +68,7 @@ const jsonLd = {
       { title: "Remove Debris & Buildup", desc: "Leaves, twigs, dirt, and roof debris are carefully removed by hand or professional tools. This clears the gutter channel so rainwater can flow freely through the system." },
       { title: "Flush & Flow Check", desc: "After debris removal, we flush the gutters and downspouts with water to ensure proper drainage. Any remaining clogs are cleared so water flows safely away from your home." },
     ]}
-    faqs={[
-      { q: "How often should gutters be cleaned?", a: "Most homes in Middle Tennessee should have their gutters cleaned at least once or twice a year. Homes with many surrounding trees may require more frequent cleaning to prevent leaves and debris from clogging the system." },
-      { q: "What happens if my gutters are clogged?", a: "Clogged gutters prevent rainwater from draining properly. This can cause water to overflow and damage your roof, siding, landscaping, and even your home's foundation." },
-      { q: "Do you clean downspouts as well?", a: "Yes. After removing debris from the gutters, we flush the entire system and clear the downspouts to ensure water flows freely away from your home." },
-    ]}
+    faqs={faqs}
     closingTitle="Stop Costly Water Damage"
     closingDesc="Our professional gutter cleaning removes debris and restores proper drainage to protect your home from overflow and foundation damage."
   />

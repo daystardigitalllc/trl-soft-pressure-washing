@@ -7,16 +7,41 @@ const title = "House Soft Wash Hohenwald, TN | TRL Soft Wash";
 const description =
   "Safe, low-pressure house soft washing across Middle Tennessee. We remove algae, mold, and mildew from siding without damaging vinyl, stucco, brick, or paint.";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "House Soft Washing",
-  name: "House Soft Wash",
-  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
-  areaServed: business.areaServed,
-  url: `${business.siteUrl}/services/house-wash`,
-  description,
-};
+const faqs = [
+  { q: "Will house washing damage my siding?", a: "No. We use a professional soft washing process that relies on specialized cleaning solutions and low pressure. This safely removes algae, mold, and grime without damaging vinyl siding, stucco, brick, or painted surfaces." },
+  { q: "How long will my house stay clean?", a: "Most homes stay clean for 12–24 months depending on shade, moisture, and nearby trees. Homes in shaded areas may see algae return sooner, but regular maintenance washing keeps your exterior looking bright and well-maintained." },
+  { q: "How often should I wash my house?", a: "In Middle Tennessee's humid climate, we recommend house washing every 1–2 years. Regular cleaning prevents mold and algae from building up and helps protect your siding and paint from long-term damage." },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "House Soft Washing",
+    name: "House Soft Wash",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: business.areaServed,
+    url: `${business.siteUrl}/services/house-wash`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "House Soft Wash", item: `${business.siteUrl}/services/house-wash` },
+    ],
+  },
+];
 ---
 <Layout title={title} description={description} path="/services/house-wash" jsonLd={jsonLd}>
   <ServiceLanding
@@ -43,11 +68,7 @@ const jsonLd = {
       { title: "Soft Wash Treatment", desc: "Our professional soft washing solution is applied to break down algae, mold, mildew, and built-up grime on your siding. This low-pressure method cleans deeply without damaging vinyl, stucco, brick, or painted surfaces." },
       { title: "Gentle Rinse & Inspection", desc: "After the solution has done its job, we rinse the home with controlled low pressure and perform a final inspection to ensure your siding looks bright, clean, and evenly restored." },
     ]}
-    faqs={[
-      { q: "Will house washing damage my siding?", a: "No. We use a professional soft washing process that relies on specialized cleaning solutions and low pressure. This safely removes algae, mold, and grime without damaging vinyl siding, stucco, brick, or painted surfaces." },
-      { q: "How long will my house stay clean?", a: "Most homes stay clean for 12–24 months depending on shade, moisture, and nearby trees. Homes in shaded areas may see algae return sooner, but regular maintenance washing keeps your exterior looking bright and well-maintained." },
-      { q: "How often should I wash my house?", a: "In Middle Tennessee's humid climate, we recommend house washing every 1–2 years. Regular cleaning prevents mold and algae from building up and helps protect your siding and paint from long-term damage." },
-    ]}
+    faqs={faqs}
     closingTitle="Bring Back Your Home's Curb Appeal"
     closingDesc="Our professional soft washing removes algae, mold, and grime, leaving your home bright, clean, and refreshed."
   />

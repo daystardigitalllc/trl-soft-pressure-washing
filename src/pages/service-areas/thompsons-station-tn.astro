@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Thompson's Station TN | TRL Soft Pressure Washing";
 const description =
   "Soft washing and pressure washing for Thompson's Station, TN's new-construction neighborhoods and rural properties. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "My house is only a couple years old, does it really need pressure washing yet?",
+    a: "Yes, this is the most common surprise for Thompson's Station homeowners. New siding and stucco start picking up builder dust, mud splash from construction traffic, and early algae film well before it's obviously dirty, usually within the first year or two.",
+  },
+  {
+    q: "Do you clean red clay staining off driveways from nearby construction?",
+    a: "Yes, red clay staining from construction traffic is one of the most common driveway issues we deal with here, and it responds well to a proper surface cleaning.",
+  },
+  {
+    q: "Do you serve the older, rural properties too, not just new subdivisions?",
+    a: "Yes, we regularly work the rural and acreage properties spread between the newer subdivisions, where mature trees usually mean more algae buildup than a typical new build sees.",
+  },
+  {
+    q: "Will pressure washing void my new home's roofing or siding warranty?",
+    a: "Improper pressure washing can, which is exactly why we use a soft wash, low-pressure approach on newer roofing and siding. It's specifically the gentler method builders and manufacturers recommend to protect warranty coverage.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Thompson's Station", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/thompsons-station-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Rural and acreage properties between subdivisions",
       "Communities near Independence High School",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("thompsons-station-tn")}
   />
 </Layout>

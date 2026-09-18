@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Nolensville TN | TRL Soft Pressure Washing";
 const description =
   "Soft washing and pressure washing for Nolensville, TN homes, from the historic Nolensville Road district to newer subdivisions. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "Do the antique shops and older buildings near Nolensville Road need a different cleaning approach?",
+    a: "Yes. The historic buildings along the Nolensville Road town center get a lower-pressure soft wash to protect older wood and masonry, the same care we'd give any historic downtown, not the higher-pressure approach we'd use on a newer driveway.",
+  },
+  {
+    q: "Why does pollen seem to be such a problem for Nolensville homes in spring?",
+    a: "Nolensville's mix of open new-construction lots and mature tree cover near Sunset and Clovercroft creates a lot of surface area for pollen to collect on siding and concrete each spring, which is one of the most common reasons we get calls this time of year.",
+  },
+  {
+    q: "Do you work on the rural and farm properties near the Rutherford County line?",
+    a: "Yes, we regularly service the larger acreage and older farm properties on the edges of Nolensville, not just the newer subdivisions closer to town.",
+  },
+  {
+    q: "How do you handle new subdivisions versus older Nolensville homes?",
+    a: "Newer stucco and siding in the growing subdivisions usually just needs routine algae and dust removal, while older homes and outbuildings sometimes carry heavier buildup that takes more time to lift safely.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Nolensville", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/nolensville-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Homes near Nolensville High School",
       "Rural and acreage properties near the Rutherford County line",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("nolensville-tn")}
   />
 </Layout>

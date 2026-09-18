@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Centerville TN | TRL Soft Pressure Washing";
 const description =
   "Reliable soft washing for Centerville, TN and Hickman County homes. Licensed, insured, firefighter owned exterior cleaning.";
+
+const faqs = [
+  {
+    q: "Do homes near the Duck River need cleaning more often?",
+    a: "Yes, properties close to the Duck River recreation areas tend to sit in more shade and higher humidity, which speeds up algae and mildew growth on siding compared to more open parts of Hickman County.",
+  },
+  {
+    q: "Do you clean historic homes near the Centerville square?",
+    a: "Yes. We use a lower-pressure soft wash approach on older homes near downtown Centerville to protect original siding and trim, rather than the higher-pressure approach used on newer concrete or driveways.",
+  },
+  {
+    q: "Do you serve rural properties outside Centerville, not just in town?",
+    a: "Most of our Hickman County work is rural, farms, acreage, and homes well off Highway 100, not just properties inside town limits.",
+  },
+  {
+    q: "How often should a Centerville home be pressure washed?",
+    a: "Most homes do well every 12 to 18 months. Homes shaded near the river or surrounded by heavy tree cover often need it closer to the 12-month mark.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Centerville", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/centerville-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Rural homes and farms across Hickman County",
       "Communities near Duck River recreation areas",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("centerville-tn")}
   />
 </Layout>

@@ -1,0 +1,74 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { business, services } from "../../data/business.js";
+
+const title = "Our Services | TRL Soft Pressure Washing | Middle Tennessee";
+const description =
+  "House soft washing, roof cleaning, concrete & driveway cleaning, deck & fence washing, gutter cleaning, and commercial pressure washing across Middle Tennessee.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "TRL Soft Pressure Washing Services",
+    itemListElement: services.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.label,
+      url: `${business.siteUrl}${s.href ?? `/services/${s.slug}`}`,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${business.siteUrl}/services` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/services" jsonLd={jsonLd}>
+  <nav class="max-w-6xl mx-auto px-6 pt-8 text-sm text-neutral-500">
+    <a href="/" class="hover:text-red-600">Home</a> <span class="mx-1">/</span> <span class="text-black font-semibold">Services</span>
+  </nav>
+
+  <section class="py-14 bg-white">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+      <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">What We Do</span>
+      <h1 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Our Services</h1>
+      <p class="mt-6 text-neutral-600 text-lg leading-relaxed">
+        Every surface, every time. From house soft washing to gutter cleaning, here's the full lineup, built on the same discipline we carry on the fireground.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-neutral-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <a href={s.href ?? `/services/${s.slug}`} class="group block bg-white border border-black/10 hover:border-red-600 transition overflow-hidden reveal">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img src={s.image} alt={s.label} class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy" />
+            </div>
+            <div class="p-6">
+              <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">{s.eyebrow}</span>
+              <h2 class="mt-2 font-extrabold uppercase text-lg mb-2">{s.label}</h2>
+              <p class="text-neutral-500 text-sm leading-relaxed mb-3">{s.description}</p>
+              <span class="text-xs font-bold uppercase tracking-wider text-black group-hover:text-red-600">{s.tag} &rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-black text-white text-center py-24 px-6">
+    <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Not Sure Which Service You Need?</h2>
+    <p class="text-neutral-300 max-w-2xl mx-auto mb-8 text-lg">Tell us what's bothering you about your property and we'll recommend the right fix, for free.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
+      <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
+    </div>
+  </section>
+</Layout>

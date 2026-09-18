@@ -3,20 +3,45 @@ import Layout from "../../layouts/Layout.astro";
 import ServiceLanding from "../../components/ServiceLanding.astro";
 import { business } from "../../data/business.js";
 
-const title = "Concrete Pressure Washing & Sealing Mt. Juliet | TRL Soft Wash";
+const title = "Concrete Pressure Washing & Sealing | Middle Tennessee | TRL Soft Wash";
 const description =
   "Industrial-grade concrete cleaning and sealing for driveways, walkways, and pool decks across Middle Tennessee. Remove algae, oil stains, and buildup safely.";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Concrete & Driveway Cleaning",
-  name: "Driveway & Concrete Cleaning",
-  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
-  areaServed: business.areaServed,
-  url: `${business.siteUrl}/services/concrete`,
-  description,
-};
+const faqs = [
+  { q: "Will all stains come out of my driveway?", a: "Most stains such as dirt, algae, mildew, and organic buildup come off very well with professional cleaning. Some deep stains like rust, oil, or old chemical spills may lighten but not disappear completely. During our inspection we'll let you know what results to expect before we begin." },
+  { q: "How long will my concrete stay clean?", a: "For most homes, concrete stays clean for 12–24 months depending on shade, moisture, and surrounding trees. Areas with heavy shade or moisture may develop algae sooner. Regular maintenance cleanings can keep your driveway and walkways looking fresh year-round." },
+  { q: "How often should I seal?", a: "In Middle Tennessee, we recommend cleaning every 2 years and re-sealing every 3-5 years depending on sun exposure." },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Concrete & Driveway Cleaning",
+    name: "Driveway & Concrete Cleaning",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: business.areaServed,
+    url: `${business.siteUrl}/services/concrete`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Concrete & Driveway Cleaning", item: `${business.siteUrl}/services/concrete` },
+    ],
+  },
+];
 ---
 <Layout title={title} description={description} path="/services/concrete" jsonLd={jsonLd}>
   <ServiceLanding
@@ -43,11 +68,7 @@ const jsonLd = {
       { title: "Deep Surface Cleaning", desc: "Using commercial surface cleaners and controlled pressure, we remove dirt, algae, mold, and grime from the concrete. This method ensures an even clean without leaving “wand marks” or damaging the surface." },
       { title: "Final Rinse & Quality Check", desc: "After the main cleaning, we perform a detailed rinse and address any remaining stains if possible. The area is inspected for consistency so your driveway, walkway, or patio looks clean, bright, and refreshed." },
     ]}
-    faqs={[
-      { q: "Will all stains come out of my driveway?", a: "Most stains such as dirt, algae, mildew, and organic buildup come off very well with professional cleaning. Some deep stains like rust, oil, or old chemical spills may lighten but not disappear completely. During our inspection we'll let you know what results to expect before we begin." },
-      { q: "How long will my concrete stay clean?", a: "For most homes, concrete stays clean for 12–24 months depending on shade, moisture, and surrounding trees. Areas with heavy shade or moisture may develop algae sooner. Regular maintenance cleanings can keep your driveway and walkways looking fresh year-round." },
-      { q: "How often should I seal?", a: "In Middle Tennessee, we recommend cleaning every 2 years and re-sealing every 3-5 years depending on sun exposure." },
-    ]}
+    faqs={faqs}
     closingTitle="Ready to Restore Your Driveway?"
     closingDesc="Don't wait for cracks to appear. Get a professional deep clean and industrial seal today."
   />

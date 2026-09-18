@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Hohenwald TN | TRL Soft Pressure Washing";
 const description =
   "Professional pressure washing for Hohenwald, TN and Lewis County homes near the Natchez Trace. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "Since TRL is based in Hohenwald, do local jobs cost less or get scheduled faster?",
+    a: "Hohenwald is our home base, so there's never a travel fee here, and we can often fit local jobs in faster than jobs farther out on our route toward Smyrna.",
+  },
+  {
+    q: "Do you clean older farmhouses and rural properties, not just homes in town?",
+    a: "Most of what we do around Lewis County is rural: farmhouses, outbuildings, and acreage properties, not just homes inside Hohenwald city limits. We adjust pressure and chemical mix for older wood and metal siding common on these properties.",
+  },
+  {
+    q: "Does the tree cover near the Natchez Trace Parkway make algae worse on Hohenwald homes?",
+    a: "Yes. Homes shaded by the hardwood forest along the Trace tend to hold moisture longer, which speeds up algae and mildew growth on siding and roofing. Those properties usually benefit from cleaning closer to the 12-month mark rather than 18.",
+  },
+  {
+    q: "How quickly can you get to a job in Hohenwald?",
+    a: "Since we're based here, Hohenwald and the surrounding Lewis County area usually have the shortest lead time on our schedule.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Hohenwald", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/hohenwald-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Rural homes and farms across Lewis County",
       "Communities near Natchez Trace Parkway",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("hohenwald-tn")}
   />
 </Layout>

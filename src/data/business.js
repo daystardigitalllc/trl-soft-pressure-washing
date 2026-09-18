@@ -44,6 +44,7 @@ export const business = {
 export const mainNav = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-trl" },
+  { label: "Services", href: "/services" },
   { label: "Residential", href: "/residential" },
   { label: "Commercial", href: "/commercial" },
   { label: "Service Areas", href: "/service-areas" },

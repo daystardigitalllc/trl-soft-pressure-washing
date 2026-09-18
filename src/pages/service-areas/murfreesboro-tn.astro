@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Murfreesboro TN | TRL Soft Pressure Washing";
 const description =
   "Reliable soft wash and pressure washing for homes and multi-family properties in Murfreesboro, TN. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "Do you clean rental and student housing near MTSU?",
+    a: "Yes, multi-family and student housing near MTSU is some of our most common Murfreesboro work, we scale the equipment up for larger buildings and common areas, not just single-family homes.",
+  },
+  {
+    q: "Does Murfreesboro's rapid growth mean more construction dust on newer homes?",
+    a: "Yes. As one of the fastest-growing cities in the country, a lot of Murfreesboro neighborhoods still have active construction nearby, and that means more dust, mud, and debris settling on siding and driveways than in older, fully built-out areas.",
+  },
+  {
+    q: "Do you offer soft washing for historic homes near the Square, not just newer builds?",
+    a: "Yes. We adjust our pressure and cleaning solution for older homes near downtown and the Square so we don't damage original siding, trim, or masonry.",
+  },
+  {
+    q: "Can you handle large commercial or HOA properties in Murfreesboro?",
+    a: "Yes, we regularly work with property managers and HOAs on larger jobs, apartment exteriors, community entrances, and shared parking areas across Rutherford County.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Murfreesboro", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/murfreesboro-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Neighborhoods near MTSU and the VA Hospital",
       "The Gateway and downtown Murfreesboro districts",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("murfreesboro-tn")}
   />
 </Layout>

@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Spring Hill TN | TRL Soft Pressure Washing";
 const description =
   "Top rated pressure washing for Spring Hill, TN homes, new subdivisions and rural properties alike. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "Do new homes near GM Ultium Cells still need pressure washing?",
+    a: "Yes. Even brand-new construction near the Ultium plant and surrounding subdivisions picks up builder dust, mud splash, and early algae film within the first year or two, well before it's visibly dirty.",
+  },
+  {
+    q: "Spring Hill straddles two counties, does that change how you service it?",
+    a: "No. We treat Spring Hill as one service area regardless of whether a property falls on the Maury County or Williamson County side of town.",
+  },
+  {
+    q: "Do you clean rural properties outside the newer subdivisions?",
+    a: "Yes, we still regularly work rural and older properties around Spring Hill, not just the newer neighborhoods that have grown up around town in recent years.",
+  },
+  {
+    q: "How often do Spring Hill driveways need cleaning given all the construction traffic?",
+    a: "Homes near active construction or new subdivisions often need driveway cleaning more often than typical, since red clay and dust from nearby building sites track in faster than normal wear.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Spring Hill", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/spring-hill-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Homes along Port Royal Road and Kedron Road",
       "Spring Hill communities across Maury and Williamson Counties",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("spring-hill-tn")}
   />
 </Layout>

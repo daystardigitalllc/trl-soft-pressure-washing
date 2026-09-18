@@ -7,16 +7,42 @@ const title = "Deck and Fence Washing Hohenwald, TN | TRL Soft Wash";
 const description =
   "Wood-safe deck and fence cleaning across Middle Tennessee. Remove algae, mildew, and gray weathering without damaging wood, composite, or vinyl.";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Deck & Fence Cleaning",
-  name: "Deck & Fence Cleaning",
-  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
-  areaServed: business.areaServed,
-  url: `${business.siteUrl}/services/decks-and-fences`,
-  description,
-};
+const faqs = [
+  { q: "Will pressure washing damage my deck or fence?", a: "No. We use controlled pressure and wood-safe cleaning solutions designed specifically for decks and fences. This removes algae, mildew, and grime without damaging the wood fibers or causing splintering." },
+  { q: "Will cleaning restore the natural color of the wood?", a: "Professional cleaning removes algae, mildew, dirt, and gray weathering from the surface of the wood. While heavily aged wood may not return to its original color completely, most decks and fences look dramatically brighter after cleaning." },
+  { q: "How often should I clean my deck or fence?", a: "In Middle Tennessee's humid climate, decks and fences should typically be cleaned every 1–2 years. Regular cleaning prevents algae buildup, keeps the surface safer to walk on, and helps extend the life of the wood." },
+  { q: "Is my deck slippery because of algae?", a: "Yes. Algae and mildew commonly grow on wood surfaces in shaded and damp areas, making decks extremely slippery when wet. Professional cleaning removes this buildup and helps restore safe footing." },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Deck & Fence Cleaning",
+    name: "Deck & Fence Cleaning",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: business.areaServed,
+    url: `${business.siteUrl}/services/decks-and-fences`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Deck & Fence Cleaning", item: `${business.siteUrl}/services/decks-and-fences` },
+    ],
+  },
+];
 ---
 <Layout title={title} description={description} path="/services/decks-and-fences" jsonLd={jsonLd}>
   <ServiceLanding
@@ -43,12 +69,7 @@ const jsonLd = {
       { title: "Wood-Safe Cleaning Treatment", desc: "A professional cleaning solution is applied to break down algae, mold, mildew, and gray weathering from the wood surface. This treatment helps lift stains and organic buildup without damaging the wood fibers." },
       { title: "Gentle Rinse & Restoration", desc: "We gently rinse the deck or fence using controlled pressure designed for wood surfaces. This removes the loosened buildup while preserving the natural grain and leaving the wood looking clean and refreshed." },
     ]}
-    faqs={[
-      { q: "Will pressure washing damage my deck or fence?", a: "No. We use controlled pressure and wood-safe cleaning solutions designed specifically for decks and fences. This removes algae, mildew, and grime without damaging the wood fibers or causing splintering." },
-      { q: "Will cleaning restore the natural color of the wood?", a: "Professional cleaning removes algae, mildew, dirt, and gray weathering from the surface of the wood. While heavily aged wood may not return to its original color completely, most decks and fences look dramatically brighter after cleaning." },
-      { q: "How often should I clean my deck or fence?", a: "In Middle Tennessee's humid climate, decks and fences should typically be cleaned every 1–2 years. Regular cleaning prevents algae buildup, keeps the surface safer to walk on, and helps extend the life of the wood." },
-      { q: "Is my deck slippery because of algae?", a: "Yes. Algae and mildew commonly grow on wood surfaces in shaded and damp areas, making decks extremely slippery when wet. Professional cleaning removes this buildup and helps restore safe footing." },
-    ]}
+    faqs={faqs}
     closingTitle="Restore Your Deck & Fence"
     closingDesc="Our professional cleaning removes algae, mildew, and gray weathering, restoring the natural beauty of your wood surfaces."
   />

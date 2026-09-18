@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Summertown TN | TRL Soft Pressure Washing";
 const description =
   "Trusted pressure washing for wooded, shaded homes in Summertown, TN and Lawrence County. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "Does the heavy tree cover around Summertown make algae worse than in town?",
+    a: "Yes. Wooded lots outside Summertown hold shade and moisture much longer than open subdivisions, which speeds up algae and mildew growth on siding, decks, and roofing. Shaded rural homes often need cleaning closer to once a year instead of every 18 months.",
+  },
+  {
+    q: "Do you work on farm properties, not just houses?",
+    a: "Yes. A lot of our Summertown work includes outbuildings, equipment sheds, and farmhouse siding, not just the main house.",
+  },
+  {
+    q: "How far is Summertown from your home base?",
+    a: "We're based in Hohenwald, just up the road, so Summertown is one of the closer stops on our route and easy to schedule.",
+  },
+  {
+    q: "Can you clean decks and patios, not just siding and concrete?",
+    a: "Yes, deck and patio cleaning is one of our most requested services out here since so many Summertown properties have outdoor living space built for acreage lots.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Summertown", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/summertown-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Rural properties across Lawrence County",
       "Homes near Summertown schools and surrounding communities",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("summertown-tn")}
   />
 </Layout>

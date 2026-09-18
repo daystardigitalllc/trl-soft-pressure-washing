@@ -7,16 +7,43 @@ const title = "Roof Cleaning Smyrna & Murfreesboro TN | Soft Wash Moss Removal |
 const description =
   "Low-pressure roof soft washing removes black algae streaks, moss, and lichen across Smyrna, Murfreesboro, and Middle Tennessee, without damaging shingles.";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Roof Soft Washing",
-  name: "Roof Cleaning",
-  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
-  areaServed: business.areaServed,
-  url: `${business.siteUrl}/services/roof-cleaning`,
-  description,
-};
+const faqs = [
+  { q: "Will roof cleaning damage my shingles?", a: "No. We use a professional soft washing method specifically designed for roofs. This low-pressure process safely removes algae, moss, and buildup without damaging shingles or stripping protective granules." },
+  { q: "What causes the black streaks on my roof?", a: "The dark streaks you see on many roofs are caused by algae called Gloeocapsa Magma. It feeds on the limestone in shingles, leaving unsightly stains across your roof." },
+  { q: "Can you remove moss from my roof in Smyrna or Murfreesboro?", a: "Yes. Moss and lichen are extremely common on Middle Tennessee roofs due to the humidity and shade. Our soft wash treatment kills moss at the root and removes it safely without pressure that could crack or loosen shingles." },
+  { q: "How do I know if my roof has moss or just algae?", a: "Algae appears as dark grey or black streaks running down the slope of the roof. Moss grows in thick green or brown clumps, often along shaded ridges and valleys. Both are removed with our soft wash treatment." },
+  { q: "How long will my roof stay clean?", a: "Most roofs stay clean for 2–4 years depending on shade, moisture, and surrounding trees. Smyrna and Murfreesboro homes near tree lines may see regrowth sooner. Regular maintenance cleaning keeps algae and moss from returning." },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Roof Soft Washing",
+    name: "Roof Cleaning",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: business.areaServed,
+    url: `${business.siteUrl}/services/roof-cleaning`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Roof Cleaning", item: `${business.siteUrl}/services/roof-cleaning` },
+    ],
+  },
+];
 ---
 <Layout title={title} description={description} path="/services/roof-cleaning" jsonLd={jsonLd}>
   <ServiceLanding
@@ -43,15 +70,9 @@ const jsonLd = {
       { title: "Professional Soft Wash Application", desc: "A specialized soft washing solution is applied to safely eliminate algae, mold, lichen, and black roof streaks. This low-pressure method cleans the roof without damaging shingles or removing protective granules." },
       { title: "Algae Kill & Natural Rinse", desc: "The treatment continues working after application, breaking down organic growth at the root. Over the following days, rainfall naturally rinses away remaining residue, leaving your roof clean and restored." },
     ]}
-    faqs={[
-      { q: "Will roof cleaning damage my shingles?", a: "No. We use a professional soft washing method specifically designed for roofs. This low-pressure process safely removes algae, moss, and buildup without damaging shingles or stripping protective granules." },
-      { q: "What causes the black streaks on my roof?", a: "The dark streaks you see on many roofs are caused by algae called Gloeocapsa Magma. It feeds on the limestone in shingles, leaving unsightly stains across your roof." },
-      { q: "Can you remove moss from my roof in Smyrna or Murfreesboro?", a: "Yes. Moss and lichen are extremely common on Middle Tennessee roofs due to the humidity and shade. Our soft wash treatment kills moss at the root and removes it safely without pressure that could crack or loosen shingles." },
-      { q: "How do I know if my roof has moss or just algae?", a: "Algae appears as dark grey or black streaks running down the slope of the roof. Moss grows in thick green or brown clumps, often along shaded ridges and valleys. Both are removed with our soft wash treatment." },
-      { q: "How long will my roof stay clean?", a: "Most roofs stay clean for 2–4 years depending on shade, moisture, and surrounding trees. Smyrna and Murfreesboro homes near tree lines may see regrowth sooner. Regular maintenance cleaning keeps algae and moss from returning." },
-    ]}
+    faqs={faqs}
     closingTitle="Restore Your Roof's Clean Look"
     closingDesc="Black roof streaks are caused by algae that slowly damages shingles. Our soft washing process eliminates the growth and restores the appearance of your roof."
-    footerNote="TRL Soft-Pressure Washing provides professional roof soft washing and moss removal services to homeowners across Smyrna, Murfreesboro, Mt. Juliet, Spring Hill, Columbia, Dickson, and the greater Middle Tennessee area. Middle Tennessee's humidity and tree cover make roofs especially prone to moss, algae, and black streak buildup. Our soft wash process removes it safely and keeps it away longer."
+    footerNote="TRL Soft-Pressure Washing provides professional roof soft washing and moss removal services to homeowners across Smyrna, Murfreesboro, Franklin, Spring Hill, Columbia, Dickson, and the greater Middle Tennessee area. Middle Tennessee's humidity and tree cover make roofs especially prone to moss, algae, and black streak buildup. Our soft wash process removes it safely and keeps it away longer."
   />
 </Layout>

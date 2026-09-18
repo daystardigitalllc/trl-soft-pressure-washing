@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Franklin TN | TRL Soft Pressure Washing";
 const description =
   "Soft washing and pressure washing for historic and modern Franklin, TN homes, from downtown Franklin to Cool Springs and Westhaven. Licensed, insured, firefighter owned.";
+
+const faqs = [
+  {
+    q: "Is it safe to pressure wash a historic home near downtown Franklin?",
+    a: "Not with high pressure, which is why we don't use it on older siding, brick, or trim near Main Street. We use a low-pressure soft wash approach instead, which cleans just as effectively without risking damage to original materials.",
+  },
+  {
+    q: "Do you clean commercial properties in Cool Springs, not just homes?",
+    a: "Yes, storefronts, sidewalks, and common areas for Cool Springs businesses and Franklin HOAs are a regular part of our work.",
+  },
+  {
+    q: "How is cleaning a newer home in Westhaven different from an older one downtown?",
+    a: "Newer stucco and fiber-cement siding in Westhaven or Berry Farms can usually handle a bit more pressure than 100-year-old wood siding near downtown, so we adjust our approach based on the home's age and material, not a one-size-fits-all setting.",
+  },
+  {
+    q: "Do you travel to Franklin from Hohenwald, or is there an extra fee?",
+    a: "Franklin is a regular stop on our route, no special travel fee for homes and businesses in the area.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Franklin", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/franklin-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Westhaven and Berry Farms",
       "Subdivisions throughout Williamson County",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("franklin-tn")}
   />
 </Layout>

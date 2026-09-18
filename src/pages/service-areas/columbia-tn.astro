@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Columbia TN | TRL Soft Pressure Washing";
 const description =
   "Professional pressure washing for historic and modern homes in Columbia, TN. Licensed, insured, firefighter owned exterior cleaning.";
+
+const faqs = [
+  {
+    q: "Do you clean historic homes near the Columbia square safely?",
+    a: "Yes. Columbia has a lot of well-preserved historic homes near downtown and the James K. Polk Home, and we use a low-pressure soft wash approach on original wood siding, brick, and masonry so it cleans without stripping paint or damaging old mortar.",
+  },
+  {
+    q: "Does Mule Day weekend affect scheduling?",
+    a: "It can. Mule Day draws a lot of visitors downtown every spring, so if you want your property looking sharp beforehand, it's worth booking a few weeks ahead of the event rather than the week of.",
+  },
+  {
+    q: "Do you serve the newer subdivisions outside downtown, not just historic homes?",
+    a: "Yes, we work throughout Maury County, from the newer neighborhoods off Highway 31 and James Campbell Blvd to the older streets near the square.",
+  },
+  {
+    q: "How often do Columbia driveways need cleaning?",
+    a: "Most concrete driveways in the area benefit from cleaning every 12 to 18 months, sooner if there's heavy oil staining or the property sits near a lot of tree cover.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Columbia", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/columbia-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Properties along Highway 31 and James Campbell Blvd",
       "New subdivisions across Maury County",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("columbia-tn")}
   />
 </Layout>

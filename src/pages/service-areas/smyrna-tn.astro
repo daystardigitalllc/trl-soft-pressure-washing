@@ -1,11 +1,30 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+import { business, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Smyrna TN | TRL Soft Pressure Washing";
 const description =
   "Professional soft washing and surface cleaning for Smyrna, TN homeowners. Licensed, insured, firefighter owned, serving Middle Tennessee.";
+
+const faqs = [
+  {
+    q: "Does being near Percy Priest Lake mean homes need cleaning more often?",
+    a: "Yes. Lakefront and near-lake homes deal with more humidity and pollen film than homes farther from the water, which speeds up algae growth on siding, docks, and outdoor surfaces.",
+  },
+  {
+    q: "Do you serve neighborhoods near the Nissan plant and Sam Ridley Parkway?",
+    a: "Yes, that corridor is one of our regular service areas, both the residential neighborhoods nearby and commercial properties along Sam Ridley Parkway.",
+  },
+  {
+    q: "Is Smyrna the farthest point on your service route?",
+    a: "It's one of the farthest from our Hohenwald home base, yes, but it's still a regular stop on our route and doesn't carry a special surcharge.",
+  },
+  {
+    q: "Do you clean pollen and dust film off homes in spring, not just algae?",
+    a: "Yes, spring pollen buildup is one of the most common reasons Smyrna homeowners call us, it's a different problem than algae but our soft wash process handles both.",
+  },
+];
 
 const jsonLd = [
   {
@@ -17,6 +36,15 @@ const jsonLd = [
     areaServed: { "@type": "City", name: "Smyrna", containedInPlace: { "@type": "State", name: "Tennessee" } },
     url: `${business.siteUrl}/service-areas/smyrna-tn`,
     description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
   },
   {
     "@context": "https://schema.org",
@@ -47,7 +75,7 @@ const jsonLd = [
       "Neighborhoods near Nissan and Sam Ridley Parkway",
       "Communities along Rocky Fork Road and Almaville Road",
     ]}
-    faqs={homeFaqs}
+    faqs={faqs}
     nearby={nearbyServiceAreas("smyrna-tn")}
   />
 </Layout>
