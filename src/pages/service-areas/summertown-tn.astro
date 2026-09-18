@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs } from "../../data/business.js";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Summertown TN | TRL Soft Pressure Washing";
 const description =
@@ -48,5 +48,6 @@ const jsonLd = [
       "Homes near Summertown schools and surrounding communities",
     ]}
     faqs={homeFaqs}
+    nearby={nearbyServiceAreas("summertown-tn")}
   />
 </Layout>

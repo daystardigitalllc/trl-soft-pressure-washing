@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+
+const title = "Pressure Washing Franklin TN | TRL Soft Pressure Washing";
+const description =
+  "Soft washing and pressure washing for historic and modern Franklin, TN homes, from downtown Franklin to Cool Springs and Westhaven. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Franklin, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Franklin", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/franklin-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Franklin, TN", item: `${business.siteUrl}/service-areas/franklin-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/franklin-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Franklin"
+    state="TN"
+    heading="Soft Washing & Pressure Washing in Franklin, TN"
+    intro="Franklin covers a lot of ground, from tree-lined historic homes near downtown to newer construction pushing out toward Cool Springs and Berry Farms. Older siding and masonry need a gentler touch than a newer stucco or fiber-cement build, and we bring the right approach for each."
+    intro2="We treat a 100-year-old home near Main Street differently than a five-year-old build in Westhaven, and that judgment call is exactly what keeps historic siding and trim from getting damaged by an overly aggressive wash."
+    offerings={[
+      { title: "Historic Home Soft Washing", desc: "Low-pressure cleaning safe for older wood siding, brick, and painted trim near downtown Franklin." },
+      { title: "New Construction Exterior Cleaning", desc: "Removing builder dust, mud splash, and early algae from newer homes in growing subdivisions." },
+      { title: "Commercial & HOA Cleaning", desc: "Storefront, sidewalk, and common-area cleaning for Cool Springs businesses and Franklin HOAs." },
+    ]}
+    servingTitle="Serving Franklin and Williamson County"
+    neighborhoods={[
+      "Historic homes near downtown Franklin and Main Street",
+      "Cool Springs and the retail/business corridor along Mack Hatcher",
+      "Westhaven and Berry Farms",
+      "Subdivisions throughout Williamson County",
+    ]}
+    faqs={homeFaqs}
+    nearby={nearbyServiceAreas("franklin-tn")}
+  />
+</Layout>

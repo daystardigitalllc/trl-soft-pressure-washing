@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs } from "../../data/business.js";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Murfreesboro TN | TRL Soft Pressure Washing";
 const description =
@@ -48,5 +48,6 @@ const jsonLd = [
       "The Gateway and downtown Murfreesboro districts",
     ]}
     faqs={homeFaqs}
+    nearby={nearbyServiceAreas("murfreesboro-tn")}
   />
 </Layout>

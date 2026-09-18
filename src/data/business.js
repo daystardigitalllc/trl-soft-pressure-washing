@@ -19,6 +19,9 @@ export const business = {
   areaServed: [
     "Smyrna, TN",
     "Murfreesboro, TN",
+    "Nolensville, TN",
+    "Franklin, TN",
+    "Thompson's Station, TN",
     "Spring Hill, TN",
     "Centerville, TN",
     "Columbia, TN",
@@ -43,6 +46,7 @@ export const mainNav = [
   { label: "About Us", href: "/about-trl" },
   { label: "Residential", href: "/residential" },
   { label: "Commercial", href: "/commercial" },
+  { label: "Service Areas", href: "/service-areas" },
 ];
 
 export const services = [
@@ -103,16 +107,36 @@ export const services = [
   },
 ];
 
+// lat/lng are approximate town-center coordinates -- accurate enough for the
+// schematic service-area map, not meant for turn-by-turn precision.
+// countyIds must match a <path id="..."> in src/data/county-map.svg exactly.
 export const serviceAreas = [
-  { slug: "smyrna-tn", city: "Smyrna", state: "TN" },
-  { slug: "murfreesboro-tn", city: "Murfreesboro", state: "TN" },
-  { slug: "spring-hill-tn", city: "Spring Hill", state: "TN" },
-  { slug: "centerville-tn", city: "Centerville", state: "TN" },
-  { slug: "columbia-tn", city: "Columbia", state: "TN" },
-  { slug: "hohenwald-tn", city: "Hohenwald", state: "TN" },
-  { slug: "summertown-tn", city: "Summertown", state: "TN" },
-  { slug: "dickson-tn", city: "Dickson", state: "TN" },
+  { slug: "hohenwald-tn", city: "Hohenwald", state: "TN", lat: 35.5495, lng: -87.5478, countyIds: ["Lewis"] },
+  { slug: "summertown-tn", city: "Summertown", state: "TN", lat: 35.4023, lng: -87.3242, countyIds: ["Lawrence"] },
+  { slug: "centerville-tn", city: "Centerville", state: "TN", lat: 35.7776, lng: -87.4636, countyIds: ["Hickman"] },
+  { slug: "columbia-tn", city: "Columbia", state: "TN", lat: 35.6151, lng: -87.0353, countyIds: ["Maury"] },
+  { slug: "dickson-tn", city: "Dickson", state: "TN", lat: 36.0770, lng: -87.3878, countyIds: ["Dickson"] },
+  { slug: "spring-hill-tn", city: "Spring Hill", state: "TN", lat: 35.7509, lng: -86.9297, countyIds: ["Maury", "Williamson"] },
+  { slug: "thompsons-station-tn", city: "Thompson's Station", state: "TN", lat: 35.7973, lng: -86.9114, countyIds: ["Williamson"] },
+  { slug: "franklin-tn", city: "Franklin", state: "TN", lat: 35.9251, lng: -86.8689, countyIds: ["Williamson"] },
+  { slug: "nolensville-tn", city: "Nolensville", state: "TN", lat: 35.9509, lng: -86.6714, countyIds: ["Williamson"] },
+  { slug: "murfreesboro-tn", city: "Murfreesboro", state: "TN", lat: 35.8456, lng: -86.3903, countyIds: ["Rutherford"] },
+  { slug: "smyrna-tn", city: "Smyrna", state: "TN", lat: 35.9828, lng: -86.5186, countyIds: ["Rutherford"] },
 ];
+
+// Nearest N other service areas by straight-line distance -- used to power
+// each location page's "We Also Service This Area" cross-links so every
+// page links out without hand-curating pairs (and staying correct if
+// serviceAreas ever changes).
+export function nearbyServiceAreas(slug, count = 3) {
+  const origin = serviceAreas.find((a) => a.slug === slug);
+  if (!origin) return [];
+  return serviceAreas
+    .filter((a) => a.slug !== slug)
+    .map((a) => ({ ...a, dist: Math.hypot(a.lat - origin.lat, a.lng - origin.lng) }))
+    .sort((a, b) => a.dist - b.dist)
+    .slice(0, count);
+}
 
 export const reviews = [
   {

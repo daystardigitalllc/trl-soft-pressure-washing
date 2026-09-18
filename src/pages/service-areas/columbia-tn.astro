@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs } from "../../data/business.js";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Columbia TN | TRL Soft Pressure Washing";
 const description =
@@ -48,5 +48,6 @@ const jsonLd = [
       "New subdivisions across Maury County",
     ]}
     faqs={homeFaqs}
+    nearby={nearbyServiceAreas("columbia-tn")}
   />
 </Layout>

@@ -38,7 +38,7 @@ import { business, services, serviceAreas } from "../data/business.js";
       </div>
 
       <div>
-        <h4 class="uppercase text-xs tracking-widest font-semibold mb-4 flex items-center gap-2"><span class="w-5 h-[2px] bg-red-600"></span>Service Area</h4>
+        <h4 class="uppercase text-xs tracking-widest font-semibold mb-4 flex items-center gap-2"><span class="w-5 h-[2px] bg-red-600"></span><a href="/service-areas" class="hover:text-white transition">Service Area</a></h4>
         <ul class="space-y-2 text-gray-400 mb-8">
           {serviceAreas.map((a) => (
             <li><a href={`/service-areas/${a.slug}`} class="hover:text-white transition">{a.city}, {a.state}</a></li>

@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
-import { business, homeFaqs } from "../../data/business.js";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
 
 const title = "Pressure Washing Hohenwald TN | TRL Soft Pressure Washing";
 const description =
@@ -48,5 +48,6 @@ const jsonLd = [
       "Communities near Natchez Trace Parkway",
     ]}
     faqs={homeFaqs}
+    nearby={nearbyServiceAreas("hohenwald-tn")}
   />
 </Layout>

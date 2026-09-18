@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+
+const title = "Pressure Washing Nolensville TN | TRL Soft Pressure Washing";
+const description =
+  "Soft washing and pressure washing for Nolensville, TN homes, from the historic Nolensville Road district to newer subdivisions. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Nolensville, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Nolensville", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/nolensville-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Nolensville, TN", item: `${business.siteUrl}/service-areas/nolensville-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/nolensville-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Nolensville"
+    state="TN"
+    heading="Soft Washing & Pressure Washing in Nolensville, TN"
+    intro="Nolensville has grown fast over the past several years, and it's a mix of a small historic town center and a steady wave of new subdivisions pushing out along Sunset and Clovercroft. Newer stucco and siding still needs regular soft washing to keep pollen, dust, and early algae from staining it."
+    intro2="We also handle the older farmhouses and larger acreage lots scattered around town, where more tree cover means more algae and mildew on siding, roofing, and outbuildings than a typical subdivision home sees."
+    offerings={[
+      { title: "House Soft Washing", desc: "Safe removal of algae, pollen film, and grime from siding on new and older homes alike." },
+      { title: "Driveway & Sidewalk Cleaning", desc: "Deep cleaning for concrete driveways, walkways, and patios." },
+      { title: "Roof Soft Washing", desc: "Low-pressure treatment that removes black streaks without voiding roofing warranties." },
+    ]}
+    servingTitle="Serving Nolensville and the Surrounding Area"
+    neighborhoods={[
+      "The historic Nolensville Road town center",
+      "Newer subdivisions along Sunset Road and Clovercroft Road",
+      "Homes near Nolensville High School",
+      "Rural and acreage properties near the Rutherford County line",
+    ]}
+    faqs={homeFaqs}
+    nearby={nearbyServiceAreas("nolensville-tn")}
+  />
+</Layout>

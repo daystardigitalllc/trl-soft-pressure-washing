@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ServiceAreaLanding from "../../components/ServiceAreaLanding.astro";
+import { business, homeFaqs, nearbyServiceAreas } from "../../data/business.js";
+
+const title = "Pressure Washing Thompson's Station TN | TRL Soft Pressure Washing";
+const description =
+  "Soft washing and pressure washing for Thompson's Station, TN's new-construction neighborhoods and rural properties. Licensed, insured, firefighter owned.";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Pressure Washing Thompson's Station, TN",
+    serviceType: "Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: "Thompson's Station", containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}/service-areas/thompsons-station-tn`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Thompson's Station, TN", item: `${business.siteUrl}/service-areas/thompsons-station-tn` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path="/service-areas/thompsons-station-tn" jsonLd={jsonLd}>
+  <ServiceAreaLanding
+    city="Thompson's Station"
+    state="TN"
+    heading="Soft Washing & Pressure Washing in Thompson's Station, TN"
+    intro="Thompson's Station is one of the fastest-growing towns in Williamson County, and most of the homes here are newer builds. New siding and stucco still need regular soft washing to keep builder haze, mud splash from construction traffic, and early algae growth from settling in."
+    intro2="We also work the older, more rural properties spread between the newer subdivisions, where mature trees mean heavier shade and more algae buildup on siding and roofing than a typical new build sees."
+    offerings={[
+      { title: "New Construction Soft Washing", desc: "Removing construction dust, mud splash, and window overspray from newer homes and subdivisions." },
+      { title: "Driveway & Concrete Cleaning", desc: "Clearing red clay staining and construction traffic buildup from driveways and sidewalks." },
+      { title: "Roof Soft Washing", desc: "Gentle algae and streak removal that protects newer roofing warranties." },
+    ]}
+    servingTitle="Serving Thompson's Station and Surrounding Williamson County"
+    neighborhoods={[
+      "New subdivisions along Thompson's Station Road and Clayton Avenue",
+      "Homes near downtown Thompson's Station and the historic depot",
+      "Rural and acreage properties between subdivisions",
+      "Communities near Independence High School",
+    ]}
+    faqs={homeFaqs}
+    nearby={nearbyServiceAreas("thompsons-station-tn")}
+  />
+</Layout>
