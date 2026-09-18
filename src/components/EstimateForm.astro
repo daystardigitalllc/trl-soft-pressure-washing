@@ -58,9 +58,10 @@ const services = [
     </div>
     <p class="text-neutral-500 mb-6">This is a ballpark range based on typical jobs of this size. We'll confirm your exact price with a free, no-obligation on-site walkthrough.</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a href={business.smsHref} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Text to Book</a>
+      <a id="textToBookBtn" href={business.smsHref} data-phone={business.phoneDisplay} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Text to Book</a>
       <a href={business.phoneHref} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">Call {business.phoneDisplay}</a>
     </div>
+    <p id="textToBookNote" class="hidden mt-4 text-sm font-semibold text-neutral-600" role="status"></p>
   </div>
 </div>
 
@@ -133,4 +134,37 @@ const services = [
   }
   document.addEventListener("DOMContentLoaded", initEstimateForm);
   initEstimateForm();
+
+  function initTextToBook() {
+    const btn = document.getElementById("textToBookBtn") as HTMLAnchorElement | null;
+    const note = document.getElementById("textToBookNote");
+    if (!btn || btn.dataset.init) return;
+    btn.dataset.init = "true";
+
+    // sms: links only launch a messaging app on phones. On desktop (or any
+    // device without one registered), nothing visibly happens when clicked —
+    // so give everyone else the number to text manually instead of silence.
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    btn.addEventListener("click", (e) => {
+      if (isMobile) return; // let the sms: link open the messaging app normally
+
+      e.preventDefault();
+      const phone = btn.dataset.phone || "";
+      if (note) {
+        note.classList.remove("hidden");
+        note.textContent = `Text us at ${phone} — sms links only open from a phone.`;
+      }
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard
+          .writeText(phone)
+          .then(() => {
+            if (note) note.textContent = `Text us at ${phone} — copied to your clipboard!`;
+          })
+          .catch(() => {});
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", initTextToBook);
+  initTextToBook();
 </script>
