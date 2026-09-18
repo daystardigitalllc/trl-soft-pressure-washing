@@ -33,7 +33,7 @@ export const business = {
     "Commercial Pressure Washing",
     "Christmas Tree Haul Away",
   ],
-  siteUrl: "https://trlsoftpressurewashing.com",
+  siteUrl: "https://trlspw.com",
   logo: "/images/about/TRLt.png",
   ownerName: "Mikey Hobbs",
 };

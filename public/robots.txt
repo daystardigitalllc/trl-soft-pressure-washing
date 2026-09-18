@@ -1,8 +1,8 @@
-# robots.txt for trlsoftpressurewashing.com
+# robots.txt for trlspw.com
 # ------------------------------------------------------------------------------
 # 1. Sitemap Location
 # ------------------------------------------------------------------------------
-Sitemap: https://trlsoftpressurewashing.com/sitemap-index.xml
+Sitemap: https://trlspw.com/sitemap-index.xml
 
 # ------------------------------------------------------------------------------
 # 2. Global Crawler Rules

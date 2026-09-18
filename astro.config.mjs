@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://trlsoftpressurewashing.com',
+  site: 'https://trlspw.com',
   trailingSlash: 'never',
   build: {
     format: 'file',
