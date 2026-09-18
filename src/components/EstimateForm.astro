@@ -142,7 +142,7 @@ const services = [
     btn.dataset.init = "true";
 
     // sms: links only launch a messaging app on phones. On desktop (or any
-    // device without one registered), nothing visibly happens when clicked —
+    // device without one registered), nothing visibly happens when clicked,
     // so give everyone else the number to text manually instead of silence.
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
@@ -153,13 +153,13 @@ const services = [
       const phone = btn.dataset.phone || "";
       if (note) {
         note.classList.remove("hidden");
-        note.textContent = `Text us at ${phone} — sms links only open from a phone.`;
+        note.textContent = `Text us at ${phone}. SMS links only open from a phone.`;
       }
       if (navigator.clipboard?.writeText) {
         navigator.clipboard
           .writeText(phone)
           .then(() => {
-            if (note) note.textContent = `Text us at ${phone} — copied to your clipboard!`;
+            if (note) note.textContent = `Text us at ${phone}, copied to your clipboard!`;
           })
           .catch(() => {});
       }

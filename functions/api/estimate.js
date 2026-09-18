@@ -11,7 +11,7 @@
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
 const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
 
-// Per-sqft rate ranges. Kept server-side only — never sent to the client.
+// Per-sqft rate ranges. Kept server-side only, never sent to the client.
 const RATES = {
   vinyl: { label: "Vinyl House Wash", low: 0.2, high: 0.25 },
   brick: { label: "Brick House Wash", low: 0.25, high: 0.35 },

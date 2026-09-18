@@ -52,7 +52,7 @@ export const services = [
     eyebrow: "Exterior House",
     tag: "Safe for vinyl, wood, stucco & brick",
     description:
-      "Gentle, low-pressure soft washing that removes mold, mildew, algae, and grime from siding, stucco, brick, and wood — without damaging your home's surface.",
+      "Gentle, low-pressure soft washing that removes mold, mildew, algae, and grime from siding, stucco, brick, and wood, without damaging your home's surface.",
     image: "/images/services/house-wash.jpg",
   },
   {
@@ -70,7 +70,7 @@ export const services = [
     eyebrow: "Roof Treatment",
     tag: "Shingles, tiles & metal roofs",
     description:
-      "Non-pressure soft wash treatment eliminates black streaks, moss, lichen, and algae from shingles and tiles — extending your roof's lifespan significantly.",
+      "Non-pressure soft wash treatment eliminates black streaks, moss, lichen, and algae from shingles and tiles, extending your roof's lifespan significantly.",
     image: "/images/services/roof.jpg",
   },
   {
