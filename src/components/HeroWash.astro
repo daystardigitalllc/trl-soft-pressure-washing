@@ -1,5 +1,6 @@
 ---
 import { business } from "../data/business.js";
+import Marquee from "./Marquee.astro";
 
 export interface Props {
   before: string;
@@ -8,10 +9,10 @@ export interface Props {
 const { before, after } = Astro.props as Props;
 ---
 <section class="hero-wash relative bg-black -mt-24">
-  <div class="hero-wash__sticky sticky top-0 h-[78vh] overflow-hidden pt-24">
+  <div class="hero-wash__sticky sticky top-0 h-[calc(100vh-46px)] overflow-hidden pt-24">
     <img class="absolute inset-0 w-full h-full object-cover" src={before} alt="House before cleaning" />
     <div class="hero-wash__after-wrap absolute top-0 left-0 w-full overflow-hidden" style="height: 0%;">
-      <img class="absolute top-0 left-0 w-full h-[78vh] object-cover" src={after} alt="House after cleaning" />
+      <img class="absolute top-0 left-0 w-full h-[calc(100vh-46px)] object-cover" src={after} alt="House after cleaning" />
     </div>
     <div class="absolute inset-0 lg:hidden bg-[linear-gradient(to_right,rgba(0,0,0,0.9)_0%,rgba(0,0,0,0.82)_55%,rgba(0,0,0,0.55)_78%,rgba(0,0,0,0.2)_92%,transparent_100%)]"></div>
     <div class="absolute inset-0 hidden lg:block bg-[linear-gradient(to_right,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.78)_26%,rgba(0,0,0,0.45)_42%,rgba(0,0,0,0.15)_58%,rgba(0,0,0,0.02)_72%,transparent_85%)]"></div>
@@ -59,11 +60,15 @@ const { before, after } = Astro.props as Props;
       </svg>
     </div>
   </div>
+
+  <div class="sticky z-40" style="top: calc(100vh - 46px);">
+    <Marquee />
+  </div>
 </section>
 
 <style>
   .hero-wash {
-    height: 92vh;
+    height: 240vh;
   }
   .hero-wash__stream-path {
     animation: hero-stream-flow 0.5s linear infinite;
