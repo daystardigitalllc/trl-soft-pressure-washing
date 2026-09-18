@@ -1,10 +1,14 @@
 // Cloudflare Pages Function: POST /api/quote
-// Sends free-tier email via Resend's shared onboarding@resend.dev sender
-// (no verified domain required) and sets reply-to the visitor's email so
-// the business owner can just hit "Reply" in their inbox.
+// Sends via Resend, reply-to set to the visitor's email so the business
+// owner can just hit "Reply" in their inbox.
+//
+// FROM_EMAIL must be an address on a domain verified in Resend -- the
+// shared onboarding@resend.dev sender can only deliver to the email
+// address on the Resend account itself, never to TO_EMAIL below. See
+// https://resend.com/domains to verify trl-spw.com.
 
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
-const FROM_EMAIL = "TRL Website <onboarding@resend.dev>";
+const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
 
 function escapeHtml(str) {
   return String(str)

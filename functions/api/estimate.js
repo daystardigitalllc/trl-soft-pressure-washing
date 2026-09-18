@@ -1,10 +1,15 @@
 // Cloudflare Pages Function: POST /api/estimate
 // Computes a low/high price range server-side so the per-sqft rate never
 // ships to the browser, emails the lead (with the computed range) via
-// Resend's shared onboarding@resend.dev sender, and returns only the range.
+// Resend, and returns only the range.
+//
+// FROM_EMAIL must be an address on a domain verified in Resend -- the
+// shared onboarding@resend.dev sender can only deliver to the email
+// address on the Resend account itself, never to TO_EMAIL below. See
+// https://resend.com/domains to verify trl-spw.com.
 
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
-const FROM_EMAIL = "TRL Website <onboarding@resend.dev>";
+const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
 
 // Per-sqft rate ranges. Kept server-side only — never sent to the client.
 const RATES = {
