@@ -114,6 +114,49 @@ export const serviceAreas = [
   { slug: "dickson-tn", city: "Dickson", state: "TN" },
 ];
 
+export const reviews = [
+  {
+    name: "Amy Burns",
+    text: "TRL was very prompt in communicating and providing exceptional service in the same day! I appreciated the streamline process of securing his service and the before/after photos he provided. I highly recommend his service!",
+  },
+  {
+    name: "Lore Wright",
+    text: "Excellent job! If you want commercial equipment, reasonable pricey, Mikey is your guy! Did multiple areas, front porch, BBQ overhang, sidewalks, breezeway and driveway. All turned out better than we hoped. Will definitely use him for all our future power and soft washing needs.",
+  },
+  {
+    name: "Ryan Burns",
+    text: "Mikey is very good at his job, and he does it for a fair price! I would gladly recommend him to anyone needing pressure washing services. We need more businesses like his!",
+  },
+  {
+    name: "Lisa Tatum",
+    text: "I could not be more pleased with all the hard work put into cleaning my home that is white vinyl siding. It is glistening! Even the UPS driver commented on how bright and new it looked. And my concrete driveway, it hasn't looked this good in years.",
+  },
+  {
+    name: "Justin Cross",
+    text: "I couldn't be happier with the work performed by TRL. Mikey went above and beyond to make sure all areas of my roof and driveway were perfect. I highly recommend TRL for all of your pressure and soft washing needs.",
+  },
+  {
+    name: "Debra Imes",
+    text: "Mikey did a great job. He was very meticulous with his work and made sure everything was cleaned up. Would recommend him highly.",
+  },
+  {
+    name: "Leslie Lyell",
+    text: "Mikey came last week to give us an estimate. It was very reasonable. He communicated with us in a timely manner, and arrived when he said he would. He cleaned the exterior of our house including porches and decks. He did a great job, and we would highly recommend him.",
+  },
+  {
+    name: "Benjamin Huck",
+    text: "Mikey was fantastic. The house looks amazing! Will be using him again.",
+  },
+  {
+    name: "Jarod Gilles",
+    text: "Showed up on time. Did a fantastic job, way better than expected. Smells so fresh outside that it made inside the house smell good as well! Highly recommend and will use again!!",
+  },
+  {
+    name: "Josh Hill",
+    text: "Great job getting tough mud stains off our brick. Made the whole house look new. I would definitely recommend using this company!",
+  },
+];
+
 export const homeFaqs = [
   {
     q: "What is soft washing?",

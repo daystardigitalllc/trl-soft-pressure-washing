@@ -1,0 +1,60 @@
+---
+export interface Props {
+  reviews: { name: string; text: string }[];
+}
+const { reviews } = Astro.props as Props;
+---
+<div class="testimonial-slider reveal">
+  <div class="testimonial-track" id="testimonialTrack">
+    {reviews.map((r) => (
+      <div class="flex-shrink-0 w-[320px] sm:w-[380px] bg-white border border-black/10 shadow-sm p-7 snap-start">
+        <div class="text-red-600 text-lg tracking-[3px] mb-4">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-neutral-600 leading-relaxed mb-6">&ldquo;{r.text}&rdquo;</p>
+        <p class="font-extrabold uppercase text-sm tracking-wide">{r.name}</p>
+        <p class="text-neutral-400 text-xs uppercase tracking-wide mt-1">Google Review</p>
+      </div>
+    ))}
+  </div>
+  <div class="flex justify-center gap-3 mt-8">
+    <button type="button" id="testimonialPrev" aria-label="Previous reviews" class="w-11 h-11 flex items-center justify-center border-2 border-black text-black hover:bg-black hover:text-white transition">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+    </button>
+    <button type="button" id="testimonialNext" aria-label="Next reviews" class="w-11 h-11 flex items-center justify-center border-2 border-black text-black hover:bg-black hover:text-white transition">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .testimonial-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0.25rem 0.25rem 1rem;
+  }
+  .testimonial-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function initTestimonialSlider() {
+    const track = document.getElementById("testimonialTrack");
+    const prev = document.getElementById("testimonialPrev");
+    const next = document.getElementById("testimonialNext");
+    if (!track || track.dataset.init) return;
+    track.dataset.init = "true";
+    const scrollByCard = (dir: number) => {
+      const card = track.querySelector("div");
+      const amount = card ? card.getBoundingClientRect().width + 24 : 340;
+      track.scrollBy({ left: dir * amount, behavior: "smooth" });
+    };
+    prev?.addEventListener("click", () => scrollByCard(-1));
+    next?.addEventListener("click", () => scrollByCard(1));
+  }
+  document.addEventListener("DOMContentLoaded", initTestimonialSlider);
+  initTestimonialSlider();
+</script>

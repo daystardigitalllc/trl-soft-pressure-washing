@@ -4,7 +4,8 @@ import Marquee from "../components/Marquee.astro";
 import Faq from "../components/Faq.astro";
 import BeforeAfter from "../components/BeforeAfter.astro";
 import ServiceCard from "../components/ServiceCard.astro";
-import { business, services, homeFaqs } from "../data/business.js";
+import Testimonials from "../components/Testimonials.astro";
+import { business, services, homeFaqs, reviews } from "../data/business.js";
 
 const title = "TRL Soft Pressure Washing | Middle Tennessee's Trusted Exterior Cleaning Experts";
 const description =
@@ -203,7 +204,7 @@ const beforeAfters = [
         <h2 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">Rated 5.0 by Local Homeowners</h2>
         <div class="mt-3 text-red-600 text-2xl tracking-[4px]">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
       </div>
-      <div class="elfsight-app-google-reviews reveal" data-elfsight-app-lazy></div>
+      <Testimonials reviews={reviews} />
     </div>
   </section>
 
@@ -227,5 +228,4 @@ const beforeAfters = [
     </div>
   </section>
 
-  <script src="https://static.elfsight.com/platform/platform.js" async></script>
 </Layout>
