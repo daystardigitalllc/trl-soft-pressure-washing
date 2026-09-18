@@ -18,18 +18,36 @@ const { before, after } = Astro.props as Props;
     <div class="absolute inset-0 hidden lg:block bg-[linear-gradient(to_right,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.78)_26%,rgba(0,0,0,0.45)_42%,rgba(0,0,0,0.15)_58%,rgba(0,0,0,0.02)_72%,transparent_85%)]"></div>
     <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.65)_0%,rgba(0,0,0,0.4)_20%,transparent_45%)]"></div>
 
-    <div class="relative z-10 h-full w-full max-w-[1280px] mx-auto px-7 flex items-center">
+    <div class="hero-wash__boundary absolute left-0 w-full z-20" style="top: 0%;">
+      <div class="hero-wash__mist absolute inset-x-0 -top-5 h-10"></div>
+      <div class="hero-wash__line absolute inset-x-0 top-0 h-[2px]"></div>
+      <span class="hero-wash__drop" style="left:10%; animation-delay:0s;"></span>
+      <span class="hero-wash__drop" style="left:24%; animation-delay:0.6s;"></span>
+      <span class="hero-wash__drop" style="left:40%; animation-delay:0.2s;"></span>
+      <span class="hero-wash__drop" style="left:56%; animation-delay:0.9s;"></span>
+      <span class="hero-wash__drop" style="left:71%; animation-delay:0.4s;"></span>
+      <span class="hero-wash__drop" style="left:86%; animation-delay:0.7s;"></span>
+      <img
+        class="hero-wash__hose absolute -top-[14px] w-[210px] sm:w-[300px] drop-shadow-[0_10px_16px_rgba(0,0,0,0.45)]"
+        style="right: 2%;"
+        src="/images/hose.png"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
+
+    <div class="hero-wash__content relative z-10 h-full w-full max-w-[1280px] mx-auto px-7 flex items-center">
       <div class="max-w-[580px] pb-16">
-        <div class="inline-flex items-center gap-2 px-4 py-2 mb-5 text-xs font-bold tracking-[0.22em] uppercase border rounded-lg bg-red-600/15 border-red-500/50 text-white">Firefighter Owned &amp; Operated</div>
-        <h1 class="mb-5 font-black uppercase leading-[0.9] tracking-tight">
+        <div class="hero-wash__reveal inline-flex items-center gap-2 px-4 py-2 mb-5 text-xs font-bold tracking-[0.22em] uppercase border rounded-lg bg-red-600/15 border-red-500/50 text-white" data-reveal-at="0.32">Firefighter Owned &amp; Operated</div>
+        <h1 class="hero-wash__reveal mb-5 font-black uppercase leading-[0.9] tracking-tight" data-reveal-at="0.5">
           <span class="block text-[clamp(3rem,6.5vw,5.8rem)] text-red-500">Restore.</span>
           <span class="block text-[clamp(3rem,6.5vw,5.8rem)] text-white">Refresh.</span>
           <span class="block mt-2 text-[clamp(1.5rem,2.8vw,2.5rem)] font-semibold text-neutral-300">Soft Pressure Washing</span>
         </h1>
-        <p class="max-w-[440px] mb-9 text-neutral-300 leading-relaxed">
+        <p class="hero-wash__reveal max-w-[440px] mb-9 text-neutral-300 leading-relaxed" data-reveal-at="0.68">
           Residential &amp; commercial soft wash and pressure cleaning — safe, thorough, and built on the same commitment to service we carry on the line. Licensed. Insured. 100% satisfaction guaranteed.
         </p>
-        <div class="flex flex-wrap items-center gap-4 mb-12">
+        <div class="hero-wash__reveal flex flex-wrap items-center gap-4 mb-12" data-reveal-at="0.86">
           <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-500 hover:-translate-y-0.5 shadow-lg shadow-red-600/30">
             Get a Free Quote
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M7 7h10v10"></path></svg>
@@ -38,26 +56,11 @@ const { before, after } = Astro.props as Props;
             Our Services ›
           </a>
         </div>
-        <div class="flex items-center gap-3 text-sm font-semibold text-neutral-300">
+        <div class="hero-wash__reveal flex items-center gap-3 text-sm font-semibold text-neutral-300" data-reveal-at="0.98">
           <span>Google Rating 5.0</span>
           <span class="text-red-500 tracking-[2px]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         </div>
       </div>
-    </div>
-
-    <div class="hero-wash__fireman absolute bottom-0 right-0 w-[220px] sm:w-[320px] z-30" style="overflow: visible; transform: translateX(18%);">
-      <img
-        alt="Firefighter spraying a soft wash hose"
-        class="w-full h-auto drop-shadow-[0_12px_20px_rgba(0,0,0,0.5)]"
-        style="transform: scaleX(-1);"
-        src="/images/firefighter-hose.png"
-      />
-      <svg class="hero-wash__stream absolute inset-0 z-10 pointer-events-none" style="overflow: visible;" viewBox="0 0 1000 650" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path class="hero-wash__stream-path" d="M419 246 C 300 150, 180 30, 60 -90" fill="none" stroke="#eaf7ff" stroke-width="10" stroke-linecap="round" stroke-dasharray="8 24" opacity="0.9" />
-        <path class="hero-wash__stream-path hero-wash__stream-path--2" d="M419 246 C 310 175, 210 80, 110 -30" fill="none" stroke="#c9ecff" stroke-width="8" stroke-linecap="round" stroke-dasharray="7 22" opacity="0.85" />
-        <path class="hero-wash__stream-path hero-wash__stream-path--3" d="M419 246 C 320 195, 240 120, 165 20" fill="none" stroke="#eaf7ff" stroke-width="7" stroke-linecap="round" stroke-dasharray="6 20" opacity="0.8" />
-        <path class="hero-wash__stream-path hero-wash__stream-path--4" d="M419 246 C 330 210, 265 155, 205 80" fill="none" stroke="#9fdcff" stroke-width="6" stroke-linecap="round" stroke-dasharray="5 18" opacity="0.7" />
-      </svg>
     </div>
   </div>
 
@@ -70,26 +73,54 @@ const { before, after } = Astro.props as Props;
   .hero-wash {
     height: 240vh;
   }
-  .hero-wash__stream-path {
-    animation: hero-stream-flow 0.5s linear infinite;
+  .hero-wash__reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
   }
-  .hero-wash__stream-path--2 {
-    animation-duration: 0.45s;
+  .hero-wash__reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
-  .hero-wash__stream-path--3 {
-    animation-duration: 0.4s;
+  .hero-wash__mist {
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.55));
+    filter: blur(6px);
   }
-  .hero-wash__stream-path--4 {
-    animation-duration: 0.35s;
+  .hero-wash__line {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 14px 2px rgba(180, 225, 255, 0.8), 0 0 32px 6px rgba(120, 200, 255, 0.35);
+    animation: hero-wash-ripple 1.8s ease-in-out infinite;
   }
-  @keyframes hero-stream-flow {
-    to {
-      stroke-dashoffset: -64;
-    }
+  @keyframes hero-wash-ripple {
+    0%, 100% { opacity: 0.75; }
+    50% { opacity: 1; }
+  }
+  .hero-wash__drop {
+    position: absolute;
+    top: -4px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(200, 235, 255, 0.9);
+    box-shadow: 0 0 4px rgba(200, 235, 255, 0.8);
+    animation: hero-wash-drop 1.4s ease-in infinite;
+  }
+  @keyframes hero-wash-drop {
+    0% { transform: translateY(0) scale(1); opacity: 0.9; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(34px) scale(0.4); opacity: 0; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-wash__stream-path {
+    .hero-wash__reveal {
+      transition: none;
+    }
+    .hero-wash__line {
       animation: none;
+    }
+    .hero-wash__drop {
+      display: none;
     }
   }
 </style>
@@ -99,12 +130,16 @@ const { before, after } = Astro.props as Props;
     const section = document.querySelector<HTMLElement>(".hero-wash");
     const sticky = document.querySelector<HTMLElement>(".hero-wash__sticky");
     const afterWrap = document.querySelector<HTMLElement>(".hero-wash__after-wrap");
-    if (!section || !sticky || !afterWrap || section.dataset.init) return;
+    const boundary = document.querySelector<HTMLElement>(".hero-wash__boundary");
+    const revealEls = Array.from(document.querySelectorAll<HTMLElement>(".hero-wash__reveal"));
+    if (!section || !sticky || !afterWrap || !boundary || !revealEls.length || section.dataset.init) return;
     section.dataset.init = "true";
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
       afterWrap.style.height = "100%";
+      boundary.style.top = "100%";
+      revealEls.forEach((el) => el.classList.add("is-revealed"));
       return;
     }
 
@@ -119,6 +154,13 @@ const { before, after } = Astro.props as Props;
       // House reveals from the top down as the visitor scrolls through the hero.
       const revealPct = Math.min(100, Math.max(0, progress * 100));
       afterWrap.style.height = `${revealPct}%`;
+      boundary.style.top = `${revealPct}%`;
+
+      // Each piece of hero content fades in once the wash reveal passes its own threshold.
+      revealEls.forEach((el) => {
+        const threshold = Number(el.dataset.revealAt || "0");
+        el.classList.toggle("is-revealed", progress >= threshold);
+      });
     };
 
     const onScroll = () => {
