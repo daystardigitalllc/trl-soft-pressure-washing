@@ -58,10 +58,21 @@ const services = [
     </div>
     <p class="text-neutral-500 mb-6">This is a ballpark range based on typical jobs of this size. We'll confirm your exact price with a free, no-obligation on-site walkthrough.</p>
     <div class="flex flex-wrap justify-center gap-4">
-      <a id="textToBookBtn" href={business.smsHref} data-phone={business.phoneDisplay} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Text to Book</a>
+      <a id="textToBookBtn" href={business.smsHref} data-phone={business.phoneDisplay} data-note="textToBookNote" class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Text to Book</a>
       <a href={business.phoneHref} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">Call {business.phoneDisplay}</a>
     </div>
     <p id="textToBookNote" class="hidden mt-4 text-sm font-semibold text-neutral-600" role="status"></p>
+  </div>
+
+  <div id="estimateBelowMin" class="hidden border-2 border-black bg-white p-8 text-center">
+    <span class="inline-block text-xs font-bold tracking-[0.2em] uppercase text-red-600 mb-3">Small Job Alert</span>
+    <p class="text-lg font-bold mb-2">Looks like this one's on the smaller side!</p>
+    <p class="text-neutral-500 mb-6">Every job carries a <span id="ebmMin">$200</span> minimum service call, so a project this size may run a little higher per square foot than our usual pricing. Reach out and we'll find the best option for your property, no obligation.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a id="belowMinTextBtn" href={business.smsHref} data-phone={business.phoneDisplay} data-note="belowMinTextNote" class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">Text Us</a>
+      <a href={business.phoneHref} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">Call {business.phoneDisplay}</a>
+    </div>
+    <p id="belowMinTextNote" class="hidden mt-4 text-sm font-semibold text-neutral-600" role="status"></p>
   </div>
 </div>
 
@@ -73,6 +84,7 @@ const services = [
     const status = document.getElementById("efStatus");
     const submitBtn = document.getElementById("efSubmit") as HTMLButtonElement | null;
     const result = document.getElementById("estimateResult");
+    const belowMin = document.getElementById("estimateBelowMin");
     const low = document.getElementById("erLow");
     const high = document.getElementById("erHigh");
 
@@ -117,10 +129,14 @@ const services = [
         const body = await res.json().catch(() => ({}));
         if (!res.ok) throw new Error(body.error || "Something went wrong.");
 
-        if (low) low.textContent = String(body.low);
-        if (high) high.textContent = String(body.high);
         form.classList.add("hidden");
-        result?.classList.remove("hidden");
+        if (body.belowMinimum) {
+          belowMin?.classList.remove("hidden");
+        } else {
+          if (low) low.textContent = String(body.low);
+          if (high) high.textContent = String(body.high);
+          result?.classList.remove("hidden");
+        }
         if (status) status.textContent = "";
       } catch (err) {
         if (status) {
@@ -136,33 +152,34 @@ const services = [
   initEstimateForm();
 
   function initTextToBook() {
-    const btn = document.getElementById("textToBookBtn") as HTMLAnchorElement | null;
-    const note = document.getElementById("textToBookNote");
-    if (!btn || btn.dataset.init) return;
-    btn.dataset.init = "true";
-
     // sms: links only launch a messaging app on phones. On desktop (or any
     // device without one registered), nothing visibly happens when clicked,
     // so give everyone else the number to text manually instead of silence.
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-    btn.addEventListener("click", (e) => {
-      if (isMobile) return; // let the sms: link open the messaging app normally
+    document.querySelectorAll<HTMLAnchorElement>("a[data-phone]").forEach((btn) => {
+      if (btn.dataset.init) return;
+      btn.dataset.init = "true";
+      const note = document.getElementById(btn.dataset.note || "");
 
-      e.preventDefault();
-      const phone = btn.dataset.phone || "";
-      if (note) {
-        note.classList.remove("hidden");
-        note.textContent = `Text us at ${phone}. SMS links only open from a phone.`;
-      }
-      if (navigator.clipboard?.writeText) {
-        navigator.clipboard
-          .writeText(phone)
-          .then(() => {
-            if (note) note.textContent = `Text us at ${phone}, copied to your clipboard!`;
-          })
-          .catch(() => {});
-      }
+      btn.addEventListener("click", (e) => {
+        if (isMobile) return; // let the sms: link open the messaging app normally
+
+        e.preventDefault();
+        const phone = btn.dataset.phone || "";
+        if (note) {
+          note.classList.remove("hidden");
+          note.textContent = `Text us at ${phone}. SMS links only open from a phone.`;
+        }
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard
+            .writeText(phone)
+            .then(() => {
+              if (note) note.textContent = `Text us at ${phone}, copied to your clipboard!`;
+            })
+            .catch(() => {});
+        }
+      });
     });
   }
   document.addEventListener("DOMContentLoaded", initTextToBook);

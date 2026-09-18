@@ -20,6 +20,9 @@ const RATES = {
   wood: { label: "Wood Deck / Fence", low: 1.0, high: 1.5 },
 };
 
+// Every job carries at least this minimum service-call price.
+const MIN_QUOTE = 200;
+
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, "&amp;")
@@ -71,10 +74,16 @@ export async function onRequestPost(context) {
     return Response.json({ error: "Please enter a valid square footage." }, { status: 400 });
   }
 
-  const low = Math.round(sqft * rate.low);
-  const high = Math.round(sqft * rate.high);
+  const rawLow = sqft * rate.low;
+  const rawHigh = sqft * rate.high;
+  const belowMinimum = rawHigh < MIN_QUOTE;
+  const low = belowMinimum ? 0 : Math.max(MIN_QUOTE, Math.round(rawLow));
+  const high = belowMinimum ? 0 : Math.max(low, Math.round(rawHigh));
 
   if (env.RESEND_API_KEY) {
+    const rangeLine = belowMinimum
+      ? `<p><strong>Quoted range shown to customer:</strong> below our $${MIN_QUOTE} minimum, prompted to contact us</p>`
+      : `<p><strong>Quoted range shown to customer:</strong> $${low} – $${high}</p>`;
     const html = `
       <h2>New instant-estimate lead from trl-spw.com</h2>
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
@@ -82,7 +91,7 @@ export async function onRequestPost(context) {
       ${phone ? `<p><strong>Phone:</strong> ${escapeHtml(phone)}</p>` : ""}
       <p><strong>Service:</strong> ${escapeHtml(rate.label)}</p>
       <p><strong>Square footage:</strong> ${escapeHtml(String(sqft))}</p>
-      <p><strong>Quoted range shown to customer:</strong> $${low} – $${high}</p>
+      ${rangeLine}
       ${notes ? `<p><strong>Notes:</strong><br>${escapeHtml(notes).replace(/\n/g, "<br>")}</p>` : ""}
     `;
 
@@ -106,6 +115,10 @@ export async function onRequestPost(context) {
       console.error("Resend error:", errBody);
       // Still return the estimate to the customer even if the notification email fails.
     }
+  }
+
+  if (belowMinimum) {
+    return Response.json({ ok: true, belowMinimum: true, minimum: MIN_QUOTE });
   }
 
   return Response.json({ ok: true, low, high });
