@@ -1,0 +1,97 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import ServiceLocationLanding from "../../../components/ServiceLocationLanding.astro";
+import { business, services, serviceAreas, nearbyServiceAreas } from "../../../data/business.js";
+import { serviceLocationContent, serviceHighlights } from "../../../data/serviceLocationContent.js";
+
+const serviceTypeBySlug = {
+  "house-wash": "House Soft Washing",
+  concrete: "Concrete & Driveway Cleaning",
+  "roof-cleaning": "Roof Soft Washing",
+  "decks-and-fences": "Deck & Fence Cleaning",
+  "gutters-windows": "Gutter Cleaning",
+};
+
+export function getStaticPaths() {
+  const realServices = services.filter((s) => s.slug);
+  const paths = [];
+  for (const service of realServices) {
+    for (const loc of serviceAreas) {
+      paths.push({ params: { service: service.slug, location: loc.slug }, props: { service, loc } });
+    }
+  }
+  return paths;
+}
+
+const { service, loc } = Astro.props as { service: (typeof services)[number]; loc: (typeof serviceAreas)[number] };
+const content = serviceLocationContent[service.slug][loc.slug];
+const highlights = serviceHighlights[service.slug];
+
+const heading = `${service.label} in ${loc.city}, ${loc.state}`;
+const title = `${service.label} in ${loc.city}, TN | TRL Soft Pressure Washing`;
+const keywordTag = `${service.label} in ${loc.city}, TN.`;
+const maxLeadChars = 155 - keywordTag.length - 1;
+let lead = content.intro.split(". ")[0].replace(/\.$/, "") + ".";
+if (lead.length > maxLeadChars) {
+  lead = lead.slice(0, maxLeadChars - 1).replace(/\s+\S*$/, "") + "...";
+}
+const description = `${lead} ${keywordTag}`;
+
+const path = `/services/${service.slug}/${loc.slug}`;
+
+const otherServicesHere = services
+  .filter((s) => s.slug && s.slug !== service.slug)
+  .map((s) => ({ label: s.label, href: `/services/${s.slug}/${loc.slug}` }));
+
+const otherLocationsForService = nearbyServiceAreas(loc.slug).map((l) => ({
+  city: l.city,
+  state: l.state,
+  href: `/services/${service.slug}/${l.slug}`,
+}));
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: serviceTypeBySlug[service.slug],
+    name: `${service.label} in ${loc.city}, TN`,
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: { "@type": "City", name: loc.city, containedInPlace: { "@type": "State", name: "Tennessee" } },
+    url: `${business.siteUrl}${path}`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: content.faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: business.siteUrl + "/" },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${business.siteUrl}/services` },
+      { "@type": "ListItem", position: 3, name: service.label, item: `${business.siteUrl}/services/${service.slug}` },
+      { "@type": "ListItem", position: 4, name: `${loc.city}, ${loc.state}`, item: `${business.siteUrl}${path}` },
+    ],
+  },
+];
+---
+<Layout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <ServiceLocationLanding
+    serviceLabel={service.label}
+    city={loc.city}
+    state={loc.state}
+    heading={heading}
+    intro={content.intro}
+    intro2={content.intro2}
+    highlights={highlights}
+    faqs={content.faqs}
+    otherServicesHere={otherServicesHere}
+    otherLocationsForService={otherLocationsForService}
+  />
+</Layout>

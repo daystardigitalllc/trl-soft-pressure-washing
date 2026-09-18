@@ -1,0 +1,106 @@
+---
+import Faq from "./Faq.astro";
+import { business } from "../data/business.js";
+
+export interface Props {
+  serviceLabel: string;
+  city: string;
+  state: string;
+  heading: string;
+  intro: string;
+  intro2: string;
+  highlights: { title: string; desc: string }[];
+  faqs: { q: string; a: string }[];
+  otherServicesHere: { label: string; href: string }[];
+  otherLocationsForService: { city: string; state: string; href: string }[];
+}
+
+const {
+  serviceLabel,
+  city,
+  state,
+  heading,
+  intro,
+  intro2,
+  highlights,
+  faqs,
+  otherServicesHere,
+  otherLocationsForService,
+} = Astro.props as Props;
+---
+<nav class="max-w-6xl mx-auto px-6 pt-8 text-sm text-neutral-500">
+  <a href="/" class="hover:text-red-600">Home</a> <span class="mx-1">/</span>
+  <a href="/services" class="hover:text-red-600">Services</a> <span class="mx-1">/</span>
+  <span class="text-black font-semibold">{serviceLabel} in {city}, {state}</span>
+</nav>
+
+<section class="py-14 bg-white">
+  <div class="max-w-4xl mx-auto px-6 text-center reveal">
+    <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">{serviceLabel} &ndash; {city}, {state}</span>
+    <h1 class="mt-3 text-4xl font-black uppercase leading-tight sm:text-5xl">{heading}</h1>
+    <p class="mt-6 text-neutral-600 text-lg leading-relaxed">{intro}</p>
+    <p class="mt-4 text-neutral-600 text-lg leading-relaxed">{intro2}</p>
+    <a href="/estimate" class="inline-flex items-center gap-2 mt-8 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent hover:text-red-600">
+      Get a Free Quote
+    </a>
+  </div>
+</section>
+
+<section class="py-16 bg-neutral-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid gap-6 sm:grid-cols-3">
+      {highlights.map((h) => (
+        <div class="bg-white border border-black/10 border-t-4 border-t-red-600 p-6 reveal">
+          <h3 class="font-extrabold uppercase text-base mb-2">{h.title}</h3>
+          <p class="text-neutral-500 text-sm leading-relaxed">{h.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="mb-10 reveal">
+      <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Frequently Asked Questions</span>
+      <h2 class="mt-3 text-2xl font-black uppercase leading-tight">{serviceLabel} Questions in {city}</h2>
+    </div>
+    <Faq faqs={faqs} />
+  </div>
+</section>
+
+<section class="py-16 bg-neutral-50 border-t border-black/10">
+  <div class="max-w-5xl mx-auto px-6 grid gap-10 sm:grid-cols-2">
+    {otherServicesHere.length > 0 && (
+      <div class="reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Also In {city}</span>
+        <h2 class="mt-2 text-xl font-black uppercase mb-5">Other Services We Offer Here</h2>
+        <ul class="space-y-2">
+          {otherServicesHere.map((s) => (
+            <li><a href={s.href} class="text-neutral-700 hover:text-red-600 font-semibold underline underline-offset-2">{s.label} in {city}</a></li>
+          ))}
+        </ul>
+      </div>
+    )}
+    {otherLocationsForService.length > 0 && (
+      <div class="reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Nearby</span>
+        <h2 class="mt-2 text-xl font-black uppercase mb-5">{serviceLabel} in Nearby Towns</h2>
+        <ul class="space-y-2">
+          {otherLocationsForService.map((l) => (
+            <li><a href={l.href} class="text-neutral-700 hover:text-red-600 font-semibold underline underline-offset-2">{serviceLabel} in {l.city}, {l.state}</a></li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+</section>
+
+<section class="bg-black text-white text-center py-24 px-6">
+  <h2 class="text-4xl font-black uppercase sm:text-5xl mb-5">Ready For {serviceLabel} in {city}?</h2>
+  <p class="text-neutral-300 max-w-2xl mx-auto mb-8 text-lg">Licensed, insured, and firefighter owned, proudly serving {city}, {state} and all of Middle Tennessee.</p>
+  <div class="flex flex-wrap justify-center gap-4">
+    <a href="/estimate" class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm bg-red-600 border-red-600 text-white hover:bg-transparent">Get a Free Quote</a>
+    <a href={business.phoneHref} class="inline-flex items-center gap-2 px-8 py-3.5 font-bold tracking-wider uppercase transition border-2 rounded-sm border-white text-white hover:bg-white hover:text-black">Call {business.phoneDisplay}</a>
+  </div>
+</section>
