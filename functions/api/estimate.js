@@ -8,6 +8,8 @@
 // address on the Resend account itself, never to TO_EMAIL below. See
 // https://resend.com/domains to verify trl-spw.com.
 
+import { sendLeadToCrm } from "../_shared/crm.js";
+
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
 const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
 
@@ -79,6 +81,21 @@ export async function onRequestPost(context) {
   const belowMinimum = rawHigh < MIN_QUOTE;
   const low = belowMinimum ? 0 : Math.max(MIN_QUOTE, Math.round(rawLow));
   const high = belowMinimum ? 0 : Math.max(low, Math.round(rawHigh));
+
+  await sendLeadToCrm(env, {
+    name,
+    email,
+    phone,
+    service: rate.label,
+    message: [
+      `Instant estimate request: ${sqft} sq ft`,
+      belowMinimum ? `Quote shown: below $${MIN_QUOTE} minimum` : `Quote shown: $${low} - $${high}`,
+      notes,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+    source: "Instant Estimate",
+  });
 
   if (env.RESEND_API_KEY) {
     const rangeLine = belowMinimum

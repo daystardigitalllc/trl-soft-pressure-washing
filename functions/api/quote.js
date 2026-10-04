@@ -7,6 +7,8 @@
 // address on the Resend account itself, never to TO_EMAIL below. See
 // https://resend.com/domains to verify trl-spw.com.
 
+import { sendLeadToCrm } from "../_shared/crm.js";
+
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
 const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
 
@@ -51,6 +53,15 @@ export async function onRequestPost(context) {
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ error: "Please provide a valid email address." }, { status: 400 });
   }
+
+  await sendLeadToCrm(env, {
+    name,
+    email,
+    phone,
+    service,
+    message: [city && `City: ${city}`, message].filter(Boolean).join("\n"),
+    source: "Website Contact Form",
+  });
 
   if (!env.RESEND_API_KEY) {
     return Response.json({ error: "Email service is not configured." }, { status: 500 });
