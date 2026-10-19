@@ -12,6 +12,7 @@ export interface Props {
   highlights: { title: string; desc: string }[];
   faqs: { q: string; a: string }[];
   extra?: string;
+  local?: string;
   process: { title: string; desc: string }[];
   otherServicesHere: { label: string; href: string }[];
   otherLocationsForService: { city: string; state: string; href: string }[];
@@ -20,6 +21,7 @@ export interface Props {
 
 const {
   extra,
+  local,
   process,
   allLocationsForService,
   serviceLabel,
@@ -65,6 +67,16 @@ const {
     </div>
   </div>
 </section>
+
+{local && (
+  <section class="py-16 bg-white border-t border-black/10">
+    <div class="max-w-3xl mx-auto px-6 reveal">
+      <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">On The Ground</span>
+      <h2 class="mt-3 text-2xl font-black uppercase leading-tight">{serviceLabel} in {city}: What We See</h2>
+      <p class="mt-5 text-neutral-600 text-lg leading-relaxed">{local}</p>
+    </div>
+  </section>
+)}
 
 <section class="py-16 bg-white">
   <div class="max-w-5xl mx-auto px-6">

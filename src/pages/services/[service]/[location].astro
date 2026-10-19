@@ -3,6 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import ServiceLocationLanding from "../../../components/ServiceLocationLanding.astro";
 import { business, services, serviceAreas, nearbyServiceAreas } from "../../../data/business.js";
 import { serviceLocationContent, serviceHighlights, serviceProcess } from "../../../data/serviceLocationContent.js";
+import { serviceLocationLocal } from "../../../data/serviceLocationLocal.js";
 
 const serviceTypeBySlug = {
   "house-wash": "House Soft Washing",
@@ -24,7 +25,12 @@ export function getStaticPaths() {
 }
 
 const { service, loc } = Astro.props as { service: (typeof services)[number]; loc: (typeof serviceAreas)[number] };
-const content = serviceLocationContent[service.slug][loc.slug];
+const baseContent = serviceLocationContent[service.slug][loc.slug];
+const localContent = serviceLocationLocal[service.slug]?.[loc.slug];
+const content = {
+  ...baseContent,
+  faqs: localContent?.faq ? [...baseContent.faqs, localContent.faq] : baseContent.faqs,
+};
 const highlights = serviceHighlights[service.slug];
 
 const displayLabel = service.slug === "roof-cleaning" ? "Roof Washing & Cleaning" : service.label;
@@ -95,6 +101,7 @@ const jsonLd = [
     intro={content.intro}
     intro2={content.intro2}
     extra={content.extra}
+    local={localContent?.local}
     highlights={highlights}
     process={serviceProcess[service.slug]}
     faqs={content.faqs}
