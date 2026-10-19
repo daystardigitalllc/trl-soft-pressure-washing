@@ -2,7 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import ServiceLocationLanding from "../../../components/ServiceLocationLanding.astro";
 import { business, services, serviceAreas, nearbyServiceAreas } from "../../../data/business.js";
-import { serviceLocationContent, serviceHighlights } from "../../../data/serviceLocationContent.js";
+import { serviceLocationContent, serviceHighlights, serviceProcess } from "../../../data/serviceLocationContent.js";
 
 const serviceTypeBySlug = {
   "house-wash": "House Soft Washing",
@@ -27,9 +27,10 @@ const { service, loc } = Astro.props as { service: (typeof services)[number]; lo
 const content = serviceLocationContent[service.slug][loc.slug];
 const highlights = serviceHighlights[service.slug];
 
-const heading = `${service.label} in ${loc.city}, ${loc.state}`;
-const title = `${service.label} in ${loc.city}, TN | TRL Soft Pressure Washing`;
-const keywordTag = `${service.label} in ${loc.city}, TN.`;
+const displayLabel = service.slug === "roof-cleaning" ? "Roof Washing & Cleaning" : service.label;
+const heading = `${displayLabel} in ${loc.city}, ${loc.state}`;
+const title = `${displayLabel} in ${loc.city}, TN | TRL Soft Pressure Washing`;
+const keywordTag = `${displayLabel} in ${loc.city}, TN.`;
 const maxLeadChars = 155 - keywordTag.length - 1;
 let lead = content.intro.split(". ")[0].replace(/\.$/, "") + ".";
 if (lead.length > maxLeadChars) {
@@ -48,6 +49,10 @@ const otherLocationsForService = nearbyServiceAreas(loc.slug).map((l) => ({
   state: l.state,
   href: `/services/${service.slug}/${l.slug}`,
 }));
+
+const allLocationsForService = serviceAreas
+  .filter((l) => l.slug !== loc.slug)
+  .map((l) => ({ city: l.city, state: l.state, href: `/services/${service.slug}/${l.slug}` }));
 
 const jsonLd = [
   {
@@ -89,9 +94,12 @@ const jsonLd = [
     heading={heading}
     intro={content.intro}
     intro2={content.intro2}
+    extra={content.extra}
     highlights={highlights}
+    process={serviceProcess[service.slug]}
     faqs={content.faqs}
     otherServicesHere={otherServicesHere}
     otherLocationsForService={otherLocationsForService}
+    allLocationsForService={allLocationsForService}
   />
 </Layout>

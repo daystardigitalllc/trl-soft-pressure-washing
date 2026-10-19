@@ -1,20 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Faq from "../components/Faq.astro";
 import { business } from "../data/business.js";
 
 const title = "Commercial Pressure Washing Services | Middle Tennessee | TRL";
 const description =
   "Reliable commercial exterior cleaning across Middle Tennessee: dumpster pads, HOA communities, storefronts, parking lots, awnings, and scheduled maintenance plans.";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  serviceType: "Commercial Pressure Washing",
-  provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
-  areaServed: business.areaServed,
-  url: `${business.siteUrl}/commercial`,
-  description,
-};
+const faqs = [
+  { q: "Can you clean after hours so it doesn't disrupt my business?", a: "Yes. We schedule early morning, evening, and off-hour jobs for storefronts, parking lots, and dumpster pads so customers and staff are never in the way." },
+  { q: "How often should a commercial property be pressure washed?", a: "Dumpster pads and high-traffic entrances usually need monthly or quarterly cleaning, while building exteriors and parking lots typically do well once or twice a year. We'll recommend a schedule after seeing the property." },
+  { q: "Do you work with HOAs and property managers on multiple properties?", a: "Yes. We regularly handle community entrances, pool decks, and sidewalks for HOAs, and we can bundle several properties under one recurring plan." },
+  { q: "Are you insured to work on commercial properties?", a: "Yes. TRL is licensed and carries liability insurance, and we can provide proof of coverage to property managers on request." },
+  { q: "Which towns do you serve for commercial pressure washing?", a: "We serve businesses from Hohenwald out to Smyrna, including Columbia, Spring Hill, Franklin, Murfreesboro, and Dickson. See the full list on our service areas page." },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Commercial Pressure Washing",
+    provider: { "@type": "HomeAndConstructionBusiness", name: business.name, telephone: business.phone, url: business.siteUrl },
+    areaServed: business.areaServed,
+    url: `${business.siteUrl}/commercial`,
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+];
 
 const offerings = [
   { title: "Dumpster Pad Cleaning", desc: "Dumpster areas collect grease, food waste, bacteria, and foul odors. Our high-pressure cleaning removes buildup, eliminates smells, and restores sanitation around your property." },
@@ -73,6 +93,37 @@ const offerings = [
           <p class="text-neutral-500">Firefighter owned and locally operated, we take pride in delivering dependable service to businesses across Middle Tennessee.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-neutral-50">
+    <div class="max-w-4xl mx-auto px-6 reveal">
+      <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">How It Works</span>
+      <h2 class="mt-3 text-3xl font-black uppercase leading-tight sm:text-4xl">Commercial Cleaning Without the Disruption</h2>
+      <p class="mt-5 text-neutral-600 text-lg leading-relaxed">
+        We start with a free walkthrough of your property, note the surfaces that need attention (dumpster pads, entrances, parking
+        areas, awnings), and give you a written price before any work is scheduled. Jobs are timed around your hours, and we protect
+        landscaping and drains so runoff stays under control.
+      </p>
+      <p class="mt-4 text-neutral-600 text-lg leading-relaxed">
+        Most of our commercial work is in small-town and suburban Tennessee: downtown storefronts in
+        <a href="/service-areas/columbia-tn" class="underline underline-offset-2 hover:text-red-600">Columbia</a>, strip centers and
+        offices around <a href="/service-areas/franklin-tn" class="underline underline-offset-2 hover:text-red-600">Franklin</a>, and
+        apartment and rental properties near MTSU in
+        <a href="/service-areas/murfreesboro-tn" class="underline underline-offset-2 hover:text-red-600">Murfreesboro</a>.
+        We're a Hohenwald-based <a href="/" class="underline underline-offset-2 hover:text-red-600">pressure washing</a> company, so
+        local routes stay efficient. See every town on our <a href="/service-areas" class="underline underline-offset-2 hover:text-red-600">service areas page</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="mb-10 reveal">
+        <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">Common Questions</span>
+        <h2 class="mt-3 text-3xl font-black uppercase leading-tight">Commercial Pressure Washing FAQs</h2>
+      </div>
+      <Faq faqs={faqs} />
     </div>
   </section>
 

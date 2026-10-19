@@ -32,6 +32,34 @@ export const serviceHighlights = {
   ],
 };
 
+export const serviceProcess = {
+  "house-wash": [
+    { title: "Inspect & protect", desc: "We check siding, trim, and windows, then pre-wet landscaping and cover outlets so nothing nearby is harmed." },
+    { title: "Soft wash treatment", desc: "A low-pressure cleaning solution breaks down algae, mold, and mildew at the root on vinyl, brick, stucco, or painted surfaces." },
+    { title: "Rinse & walk-through", desc: "We rinse with controlled pressure and do a final inspection so the finish is even from top to bottom." },
+  ],
+  concrete: [
+    { title: "Inspect & prep", desc: "We look for cracks, old sealer, and heavy stains, and protect plants, siding, and fixtures before cleaning starts." },
+    { title: "Surface cleaning", desc: "Commercial surface cleaners lift oil, algae, and embedded grime evenly, without the wand marks a hand-held nozzle leaves." },
+    { title: "Rinse & optional sealing", desc: "After a detailed rinse, we can seal the concrete to resist future staining." },
+  ],
+  "roof-cleaning": [
+    { title: "Inspect the roof", desc: "We check for loose shingles and heavy growth, and protect landscaping and surrounding surfaces." },
+    { title: "Soft wash application", desc: "A roof-safe solution kills algae, moss, and lichen without pressure that could strip protective granules." },
+    { title: "Natural rinse", desc: "The treatment keeps working for days; rainfall rinses away the residue and leaves the roof clean." },
+  ],
+  "decks-and-fences": [
+    { title: "Inspect the wood", desc: "We check for loose boards and nails and note heavy algae or mildew, then protect nearby plants and surfaces." },
+    { title: "Wood-safe cleaning", desc: "A wood-safe solution lifts algae, mildew, and gray weathering without damaging the fibers." },
+    { title: "Gentle rinse", desc: "Controlled pressure rinses the loosened buildup while preserving the grain, ready for stain or sealer if you want it." },
+  ],
+  "gutters-windows": [
+    { title: "Inspect the system", desc: "We check gutters and downspouts for clogs, sagging, and drainage problems, and set ladders safely." },
+    { title: "Clear the debris", desc: "Leaves, twigs, and roof grit are removed by hand so the whole channel is open." },
+    { title: "Flush & flow check", desc: "We flush every downspout with water to confirm it drains away from your foundation." },
+  ],
+};
+
 export const serviceLocationContent = {
   "house-wash": {
     "hohenwald-tn": {
@@ -275,9 +303,11 @@ export const serviceLocationContent = {
     "franklin-tn": {
       intro: "Older, tree-shaded roofs near downtown Franklin tend to carry heavier moss and algae buildup than the newer roofs going up in Westhaven and Berry Farms, which usually just need routine streak removal.",
       intro2: "We also handle roof cleaning for Cool Springs commercial buildings alongside residential work throughout Williamson County.",
+      extra: "If you've been searching for roof washing near you in Franklin, this is the service: a low-pressure soft wash that kills the algae, moss, and lichen on your shingles instead of blasting them with a pressure washer. It protects the granules that shield your roof from the sun, which is why manufacturers recommend it for keeping a warranty intact. Most Franklin roofs we treat stay clean for two to four years.",
       faqs: [
         { q: "Do historic Franklin homes need moss removal more than newer builds?", a: "Often yes, mature tree cover near downtown creates more shade, which is what drives heavier moss and algae growth compared to newer, more open subdivisions." },
         { q: "Do you clean commercial roofs in Cool Springs?", a: "Yes, we handle roof cleaning for Cool Springs commercial buildings in addition to residential work throughout Franklin." },
+        { q: "Is roof washing the same as roof cleaning?", a: "Yes. Roof washing and roof cleaning describe the same soft wash treatment: a low-pressure solution that kills algae, moss, and lichen, never a high-pressure blast that could strip shingle granules." },
       ],
     },
     "nolensville-tn": {
@@ -481,9 +511,11 @@ export const serviceLocationContent = {
     "smyrna-tn": {
       intro: "Homes near Percy Priest Lake and the surrounding tree cover deal with heavier gutter debris than properties closer to the Nissan plant and more open parts of town.",
       intro2: "We service both residential gutters and larger commercial roof drainage systems throughout Smyrna.",
+      extra: "Gutter cleaning in Smyrna tends to cluster in late fall, after the leaves come down across Rutherford County, and again in spring when pollen and seed pods clog downspouts. Booking just after the main leaf drop means the gutters stay clear through winter rain, instead of overflowing against your siding and foundation. Every gutter cleaning we do in Smyrna includes a downspout flush, so you know the water is really leaving the house.",
       faqs: [
         { q: "Do lakefront Smyrna homes need gutter cleaning more often?", a: "Often yes, the tree cover near Percy Priest Lake tends to shed more debris than the more open areas near town." },
         { q: "Do you clean commercial roof drainage in Smyrna, not just home gutters?", a: "Yes, we service commercial roof drainage systems throughout Smyrna in addition to residential gutter cleaning." },
+        { q: "When is the best time for gutter cleaning in Smyrna?", a: "Right after the leaves finish falling in late fall is the most important visit, with a second check in spring after pollen and seed pods. Homes under heavy tree cover can use a third mid-summer check." },
       ],
     },
   },
