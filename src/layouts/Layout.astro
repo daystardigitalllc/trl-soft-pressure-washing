@@ -53,6 +53,13 @@ const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     {ldArray.map((block) => (
       <script type="application/ld+json" set:html={JSON.stringify(block)} />
     ))}
+    <!-- Google Analytics 4: page views plus phone taps, email taps and form submissions -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-Y3PR381QEH"></script>
+    <script is:inline>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-Y3PR381QEH');
+      document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';if(h.indexOf('tel:')===0)gtag('event','phone_click',{link_url:h});else if(h.indexOf('mailto:')===0)gtag('event','email_click',{link_url:h})},true);
+      document.addEventListener('submit',function(e){var f=e.target;if(!f||f.matches('[role=search],.search-form'))return;gtag('event','form_submit',{form_id:f.id||''})},true);
+    </script>
   </head>
   <body>
     {!noHeaderFooter && <Header dark={darkHeader} />}
