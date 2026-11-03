@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 import { business } from "../data/business.js";
+import seoOverrides from "../data/seo-overrides.json";
 
 export interface Props {
   title: string;
@@ -15,8 +16,8 @@ export interface Props {
 }
 
 const {
-  title,
-  description,
+  title: pageTitle,
+  description: pageDescription,
   path,
   ogImage = "/images/about/TRL.jpg",
   jsonLd,
@@ -24,6 +25,10 @@ const {
   darkHeader = false,
 } = Astro.props as Props;
 
+// the DayStar SEO job writes approved title/description changes for template-built pages here (src/data/seo-overrides.json)
+const override = (seoOverrides as Record<string, { title?: string; description?: string }>)[path.length > 1 ? path.replace(/\/$/, "") : path];
+const title = override?.title || pageTitle;
+const description = override?.description || pageDescription;
 const canonical = new URL(path, business.siteUrl).toString();
 const ogImageUrl = new URL(ogImage, business.siteUrl).toString();
 const ldArray = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
