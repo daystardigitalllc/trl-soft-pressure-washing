@@ -24,6 +24,61 @@ const faqs = [
     q: "How often do Spring Hill driveways need cleaning given all the construction traffic?",
     a: "Homes near active construction or new subdivisions often need driveway cleaning more often than typical, since red clay and dust from nearby building sites track in faster than normal wear.",
   },
+  {
+    q: "How do I get a pressure washing quote in Spring Hill?",
+    a: "Quotes are free. Call or text (931) 213-0234, or fill out the quote form on this site, and we'll assess your property and recommend exactly what it needs.",
+  },
+  {
+    q: "What's the difference between soft washing and pressure washing?",
+    a: "Soft washing uses low pressure and a specialized cleaning solution to kill algae, mold, and mildew on siding, stucco, brick, and trim without damaging them. Concrete such as driveways and walkways is cleaned with surface-cleaning equipment instead.",
+  },
+  {
+    q: "Will you protect my landscaping while you wash my house?",
+    a: "Yes. We pre-wet landscaping and protect outlets and other delicate areas before applying any cleaning solution.",
+  },
+  {
+    q: "How often should I have my Spring Hill house washed?",
+    a: "Most homes do well every 12 to 18 months. Homes with heavy shade, nearby trees, or high humidity may need it more often to keep algae and mold from building up.",
+  },
+];
+
+const extraSections = [
+  {
+    eyebrow: "Our Process",
+    title: "How We Wash Spring Hill Homes",
+    paragraphs: [
+      "We start by inspecting your siding, trim, and exterior surfaces. Landscaping, outlets, and delicate areas are pre-wet and protected before we begin. We then apply a soft wash solution at low pressure to break down algae, mold, and grime, and finish with a controlled low-pressure rinse and a final inspection so the siding looks evenly clean.",
+    ],
+  },
+  {
+    eyebrow: "Right Method, Right Surface",
+    title: "Matching the Method to the Surface",
+    items: [
+      { title: "Siding, Stucco, Brick & Trim", desc: "Low-pressure soft wash, not wand-blasting, so surfaces are cleaned without damage." },
+      { title: "Driveways, Walkways & Patios", desc: "Surface cleaning for concrete, which helps with the red clay and builder dust that tracks in from nearby construction." },
+      { title: "Roofs", desc: "Non-pressure soft wash for shingles, tile, and metal roofs." },
+      { title: "Wood Decks & Fences", desc: "Wood-safe cleaning to remove gray oxidation and mildew." },
+    ],
+  },
+  {
+    eyebrow: "Commercial",
+    title: "Spring Hill Businesses and HOAs",
+    paragraphs: [
+      "We also clean storefronts, parking lots, dumpster pads, awnings, and HOA entrances and sidewalks. We start with a free walkthrough and give you a written price before any work is scheduled, and jobs can be timed early morning, evening, or off-hours around your business.",
+    ],
+    links: [{ label: "Commercial Pressure Washing", href: "/commercial" }],
+  },
+  {
+    eyebrow: "Free Estimate",
+    title: "Your Free Spring Hill Estimate",
+    paragraphs: [
+      "Call or text (931) 213-0234, or use the quote form. We assess your property and recommend what it needs, at no charge. We're based in Hohenwald and serve Spring Hill and the rest of Middle Tennessee.",
+    ],
+    links: [
+      { label: "Request a Free Quote", href: "/estimate" },
+      { label: `Call ${business.phoneDisplay}`, href: business.phoneHref },
+    ],
+  },
 ];
 
 const jsonLd = [
@@ -77,6 +132,7 @@ const jsonLd = [
       "Spring Hill communities across Maury and Williamson Counties",
     ]}
     faqs={faqs}
+    extraSections={extraSections}
     nearby={nearbyServiceAreas("spring-hill-tn")}
   />
 </Layout>
