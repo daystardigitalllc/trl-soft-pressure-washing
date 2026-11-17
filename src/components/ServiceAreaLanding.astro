@@ -14,9 +14,16 @@ export interface Props {
   neighborhoods: string[];
   faqs: { q: string; a: string }[];
   nearby: { city: string; state: string; slug: string }[];
+  extraSections?: {
+    eyebrow?: string;
+    title: string;
+    paragraphs?: string[];
+    items?: { title: string; desc: string }[];
+    links?: { label: string; href: string }[];
+  }[];
 }
 
-const { city, state, citySlug, heading, intro, intro2, offerings, servingTitle, neighborhoods, faqs, nearby } = Astro.props as Props;
+const { city, state, citySlug, heading, intro, intro2, offerings, servingTitle, neighborhoods, faqs, nearby, extraSections = [] } = Astro.props as Props;
 const realServices = services.filter((s) => s.slug);
 ---
 <nav class="max-w-6xl mx-auto px-6 pt-8 text-sm text-neutral-500">
@@ -77,6 +84,35 @@ const realServices = services.filter((s) => s.slug);
     </ul>
   </div>
 </section>
+
+{extraSections.map((sec, i) => (
+  <section class={`py-20 ${i % 2 === 0 ? "bg-neutral-50" : "bg-white"} border-t border-black/10`}>
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="reveal">
+        {sec.eyebrow && <span class="text-xs font-bold tracking-[0.2em] uppercase text-red-600">{sec.eyebrow}</span>}
+        <h2 class="mt-3 text-2xl font-black uppercase leading-tight sm:text-3xl">{sec.title}</h2>
+        {sec.paragraphs?.map((para) => <p class="mt-4 text-neutral-600 text-lg leading-relaxed">{para}</p>)}
+      </div>
+      {sec.items && (
+        <div class="mt-8 grid gap-6 sm:grid-cols-2">
+          {sec.items.map((it) => (
+            <div class="bg-white border border-black/10 border-t-4 border-t-red-600 p-6 reveal">
+              <h3 class="font-extrabold uppercase text-base mb-2">{it.title}</h3>
+              <p class="text-neutral-500 text-sm leading-relaxed">{it.desc}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {sec.links && (
+        <div class="mt-8 flex flex-wrap gap-4 reveal">
+          {sec.links.map((l) => (
+            <a href={l.href} class="inline-flex items-center gap-2 px-6 py-3 font-bold tracking-wider uppercase transition border-2 rounded-sm border-black text-black hover:bg-black hover:text-white">{l.label}</a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+))}
 
 <section class="py-24 bg-neutral-50">
   <div class="max-w-3xl mx-auto px-6">
