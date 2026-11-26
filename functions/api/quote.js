@@ -96,7 +96,8 @@ export async function onRequestPost(context) {
   if (!resendResponse.ok) {
     const errBody = await resendResponse.text();
     console.error("Resend error:", errBody);
-    return Response.json({ error: "Failed to send. Please call or text us instead." }, { status: 502 });
+    // 500, never 502/504/520-527: Cloudflare replaces those with its own error page and the visitor never sees this message.
+    return Response.json({ error: "Failed to send. Please call or text us instead." }, { status: 500 });
   }
 
   // DayStar dashboard: confirm the lead was received (no-op until DS_LEAD_SECRET is set; never affects the visitor).
