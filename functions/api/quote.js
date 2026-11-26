@@ -8,6 +8,7 @@
 // https://resend.com/domains to verify trl-spw.com.
 
 import { sendLeadToCrm } from "../_shared/crm.js";
+import { reportLead, pageOf } from "../_shared/dslead.js";
 
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
 const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
@@ -98,5 +99,7 @@ export async function onRequestPost(context) {
     return Response.json({ error: "Failed to send. Please call or text us instead." }, { status: 502 });
   }
 
+  // DayStar dashboard: confirm the lead was received (no-op until DS_LEAD_SECRET is set; never affects the visitor).
+  context.waitUntil(reportLead(env, 4725, "Quote form", pageOf(request), { name, phone, email }));
   return Response.json({ ok: true });
 }

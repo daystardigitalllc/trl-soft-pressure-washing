@@ -9,6 +9,7 @@
 // https://resend.com/domains to verify trl-spw.com.
 
 import { sendLeadToCrm } from "../_shared/crm.js";
+import { reportLead, pageOf } from "../_shared/dslead.js";
 
 const TO_EMAIL = "trlsoftpressurewashing@gmail.com";
 const FROM_EMAIL = "TRL Website <quotes@trl-spw.com>";
@@ -133,6 +134,9 @@ export async function onRequestPost(context) {
       // Still return the estimate to the customer even if the notification email fails.
     }
   }
+
+  // DayStar dashboard: confirm the lead was received (no-op until DS_LEAD_SECRET is set; never affects the visitor).
+  context.waitUntil(reportLead(env, 4725, "Instant estimate", pageOf(request), { name, phone, email }));
 
   if (belowMinimum) {
     return Response.json({ ok: true, belowMinimum: true, minimum: MIN_QUOTE });
