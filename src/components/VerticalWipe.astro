@@ -7,7 +7,7 @@ const { before, after } = Astro.props as Props;
 ---
 <section class="wipe relative bg-black">
   <div class="wipe__sticky sticky top-0 h-screen overflow-hidden">
-    <img class="absolute inset-0 w-full h-full object-cover" src={before} alt="Dirty siding before soft washing" />
+    <img class="absolute inset-0 w-full h-full object-cover" src={before} alt="Dirty siding before soft washing" loading="lazy" decoding="async" />
     <div class="wipe__after-wrap absolute top-0 left-0 w-full overflow-hidden" style="height: 0%;">
       <img class="absolute top-0 left-0 w-full h-screen object-cover" src={after} alt="Clean siding after soft washing" />
     </div>
